@@ -1,0 +1,28 @@
+type Point BEGIN
+    x: float;
+    y: float;
+    distanceToOrigin[]: float BEGIN
+        return sqrt[x*x + y*y];
+    END
+END
+
+var globalVar: int = 10;
+var pointObj: Point;
+
+function add[a: int, b: int]: int BEGIN
+    return a + b;
+END
+
+function main[] BEGIN
+    pointObj.x = 3.0;
+    pointObj.y = 4.0;
+
+    while (globalVar != 5) {
+        print("Global var: ", globalVar);
+        globalVar = globalVar - 1;
+    }
+
+    var distance = pointObj.distanceToOrigin();
+    
+    print("Distance to origin: ", distance);
+END
