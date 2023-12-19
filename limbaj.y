@@ -15,11 +15,13 @@ void yyerror(const char * s);
     char* string;
     int intval;
     float floatval;
+    bool boolval;
 }
 
 %token  START STOP ASSIGN NR BOOL ID TYPE ARRAY FOR BGIN IF WHILE END EQ
 
-%type <intval> NR BOOL
+%type <intval> NR
+%type <boolval> BOOL
 %type <string> ID TYPE ARRAY
 
 %start progr
@@ -40,7 +42,7 @@ field_list: field_list ID ':' TYPE ';'
     |
     ;
 
-method_list: method_list TYPE ID '[' param_list ']' 'START' 'STOP' ';'
+method_list: method_list TYPE ID '[' param_list ']' "START" "STOP"
     |
     ;
 
@@ -56,18 +58,15 @@ var_def: TYPE ID ASSIGN expr
     | TYPE ID
     ;
 
-block : BGIN stmt_list END
-    ;
-
 global_funcs:
     | global_funcs func_def
     ;
 
 func_def: TYPE ID '[' param_list ']' '{' '}' ';'
-    | TYPE ID '[' param_list ']' 'START' stmt_list 'STOP' ;
+    | TYPE ID '[' param_list ']' "START" stmt_list "STOP" ;
     ;
 
-main_func: TYPE ID '[' ']' 'START' stmt_list 'STOP'
+main_func: TYPE ID '[' ']' "START" stmt_list "STOP"
     ;
 
 stmt_list: stmt_list statement ';'

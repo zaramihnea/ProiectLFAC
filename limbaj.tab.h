@@ -39,33 +39,37 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ASSIGN = 258,
-     NR = 259,
-     BOOL = 260,
-     ID = 261,
-     TYPE = 262,
-     ARRAY = 263,
-     FOR = 264,
-     BGIN = 265,
-     IF = 266,
-     WHILE = 267,
-     END = 268,
-     EQ = 269
+     START = 258,
+     STOP = 259,
+     ASSIGN = 260,
+     NR = 261,
+     BOOL = 262,
+     ID = 263,
+     TYPE = 264,
+     ARRAY = 265,
+     FOR = 266,
+     BGIN = 267,
+     IF = 268,
+     WHILE = 269,
+     END = 270,
+     EQ = 271
    };
 #endif
 /* Tokens.  */
-#define ASSIGN 258
-#define NR 259
-#define BOOL 260
-#define ID 261
-#define TYPE 262
-#define ARRAY 263
-#define FOR 264
-#define BGIN 265
-#define IF 266
-#define WHILE 267
-#define END 268
-#define EQ 269
+#define START 258
+#define STOP 259
+#define ASSIGN 260
+#define NR 261
+#define BOOL 262
+#define ID 263
+#define TYPE 264
+#define ARRAY 265
+#define FOR 266
+#define BGIN 267
+#define IF 268
+#define WHILE 269
+#define END 270
+#define EQ 271
 
 
 
@@ -77,9 +81,10 @@ typedef union YYSTYPE
     char* string;
     int intval;
     float floatval;
+    bool boolval;
 }
 /* Line 1529 of yacc.c.  */
-#line 83 "limbaj.tab.h"
+#line 88 "limbaj.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
