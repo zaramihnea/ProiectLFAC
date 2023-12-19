@@ -18,7 +18,7 @@ void yyerror(const char * s);
     bool boolval;
 }
 
-%token  START STOP ASSIGN NR BOOL ID TYPE ARRAY FOR BGIN IF WHILE END EQ
+%token  START STOP ASSIGN NR BOOL ID TYPE UTYPE ARRAY FOR BGIN IF WHILE END EQ
 
 %type <intval> NR
 %type <boolval> BOOL
@@ -35,14 +35,14 @@ user_types:
     | user_types type_def ';'
     ;
 
-type_def: TYPE ID '{' field_list method_list '}'
+type_def: UTYPE ID '{' field_list method_list '}'
     ;
 
 field_list: field_list ID ':' TYPE ';'
     |
     ;
 
-method_list: method_list TYPE ID '[' param_list ']' "START" "STOP"
+method_list: method_list TYPE ID '[' param_list ']' START stmt_list STOP
     |
     ;
 
@@ -50,23 +50,31 @@ param_list: param_list TYPE ID
     |
     ;
 
-global_vars:
-    | global_vars var_def ';'
-    ;
+global_vars: /* eps */
+            | var_defs 
+            ;
+
+var_defs: var_def ';'
+        | var_defs var_def ';'
+        ;
 
 var_def: TYPE ID ASSIGN expr
     | TYPE ID
     ;
 
-global_funcs:
-    | global_funcs func_def
-    ;
+global_funcs: /* eps */
+            | func_defs
+            ;
+
+func_defs: func_def
+        | func_defs func_def
+        ;
 
 func_def: TYPE ID '[' param_list ']' '{' '}' ';'
-    | TYPE ID '[' param_list ']' "START" stmt_list "STOP" ;
+    | TYPE ID '[' param_list ']' START stmt_list STOP ;
     ;
 
-main_func: TYPE ID '[' ']' "START" stmt_list "STOP"
+main_func: TYPE ID '[' ']' START stmt_list STOP
     ;
 
 stmt_list: stmt_list statement ';'

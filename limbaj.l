@@ -21,21 +21,15 @@
 "for" {
     return FOR;
 }
-[a-zA-Z][a-zA-Z0-9]* {
-    yylval.string = strdup(yytext);
-    return ID;
-}
+
 ":=" {
     return ASSIGN;
 }
 [0-9]+ {
-    yylval.string = strdup(yytext);
+    yylval.intval = atoi(yytext);
     return NR;
 }
-[0-1]+ {
-    yylval.string = strdup(yytext);
-    return BOOL;
-}
+
 "true"|"false" {
     yylval.string = strdup(yytext);
     return BOOL;
@@ -43,6 +37,10 @@
 "int_array"|"float_array"|"char_array"|"string_array"|"bool_array" {
     yylval.string = strdup(yytext);
     return ARRAY;
+}
+[a-zA-Z][a-zA-Z0-9]* {
+    yylval.string = strdup(yytext);
+    return ID;
 }
 [ \t] ;
 \n {
@@ -52,8 +50,3 @@
     return yytext[0];
 }
 %%
-
-void yyerror(const char *s){
-    printf("error: %s at line:%d\n", s, yylineno);
-    exit(1);
-}
