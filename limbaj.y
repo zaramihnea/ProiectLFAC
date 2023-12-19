@@ -2,25 +2,13 @@
 #include <iostream>
 #include <vector>
 #include "IdList.h"
+#include <stdio.h>
+#include <stdlib.h>
 extern FILE* yyin;
 extern char* yytext;
 extern int yylineno;
 extern int yylex();
 void yyerror(const char * s);
-
-class UserType BEGIN
-public:
-    int field1;
-    float field2;
-    
-    void method1[int param1, float param2] BEGIN
-
-    END
-END;
-
-//test
-int Eval(int expr);
-std::string TypeOf(int variable);
 
 %}
 %union {
@@ -29,12 +17,13 @@ std::string TypeOf(int variable);
     float floatval;
 }
 
-%token  START STOP ASSIGN NR BOOL ID TYPE ARRAY
+%token  START STOP ASSIGN NR BOOL ID TYPE ARRAY FOR BGIN IF WHILE END EQ
 
 %type <intval> NR BOOL
 %type <string> ID TYPE ARRAY
 
 %start progr
+
 %%
 progr: user_types global_vars global_funcs main_func {
     printf("corect\n");
@@ -51,7 +40,7 @@ field_list: field_list ID ':' TYPE ';'
     |
     ;
 
-method_list: method_list TYPE ID '[' param_list ']' 'BEGIN' 'END' ';'
+method_list: method_list TYPE ID '[' param_list ']' 'START' 'STOP' ';'
     |
     ;
 
@@ -67,7 +56,7 @@ var_def: TYPE ID ASSIGN expr
     | TYPE ID
     ;
 
-block : BGIN list END  
+block : BGIN stmt_list END
     ;
 
 global_funcs:
@@ -75,10 +64,10 @@ global_funcs:
     ;
 
 func_def: TYPE ID '[' param_list ']' '{' '}' ';'
-    | TYPE ID '[' param_list ']' 'BEGIN' stmt_list 'END'
+    | TYPE ID '[' param_list ']' 'START' stmt_list 'STOP' ;
     ;
 
-main_func: TYPE ID '[' ']' 'BEGIN' stmt_list 'END'
+main_func: TYPE ID '[' ']' 'START' stmt_list 'STOP'
     ;
 
 stmt_list: stmt_list statement ';'
@@ -129,7 +118,17 @@ void yyerror(const char * s) {
 }
 
 int main(int argc, char** argv) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s filename\n", argv[0]);
+        return 1;
+    }
+
     yyin = fopen(argv[1], "r");
+    if (!yyin) {
+        fprintf(stderr, "Error opening file: %s\n", argv[1]);
+        return 1;
+    }
+
     yyparse();
     std::cout << "Variables:" << std::endl;
     return 0;
