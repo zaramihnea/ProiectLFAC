@@ -14,12 +14,12 @@ function add[a: int, b: int]: int START
 STOP
 
 function main[] START
-    pointObj.x = 3.0;
-    pointObj.y = 4.0;
+    pointObj.x := 3.0;
+    pointObj.y := 4.0;
 
     while (globalVar != 5) {
         print("Global var: ", globalVar);
-        globalVar = globalVar - 1;
+        globalVar := globalVar - 1;
     }
 
     var distance = pointObj.distanceToOrigin();
