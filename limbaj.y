@@ -18,10 +18,6 @@ public:
     END
 END;
 
-// var globale
-int globalVar;
-UserType userObj;
-
 //test
 int Eval(int expr);
 std::string TypeOf(int variable);
@@ -69,6 +65,9 @@ global_vars:
 
 var_def: TYPE ID ASSIGN expr
     | TYPE ID
+    ;
+
+block : BGIN list END  
     ;
 
 global_funcs:
@@ -134,12 +133,4 @@ int main(int argc, char** argv) {
     yyparse();
     std::cout << "Variables:" << std::endl;
     return 0;
-}
-
-int Eval(int expr) {
-    return expr;
-}
-
-std::string TypeOf(int variable) {
-    return "type";
 }

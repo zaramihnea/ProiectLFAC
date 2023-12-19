@@ -13,10 +13,10 @@
     return TYPE;
 }
 "begin_progr" {
-    return START;
+    return BEGIN;
 }
 "end_progr" {
-    return STOP;
+    return END;
 }
 [a-zA-Z][a-zA-Z0-9]* {
     yylval.string = strdup(yytext);
