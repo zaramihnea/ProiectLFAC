@@ -1,0 +1,6 @@
+variabila : _x de tip int care are valoarea= 0
+variabila : _y de tip float care are valoarea= 0.000000
+variabila : _a de tip int care are valoarea= 5
+variabila : _f de tip float care are valoarea= 0.000000
+variabila : _sum de tip int care are valoarea= 10
+variabila : _abc de tip int care are valoarea= 0

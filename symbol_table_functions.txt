@@ -1,0 +1,2 @@
+Pentru functia cu numele maxi de tip int avem urmatorii 1 parametrii 
+Parametrul este de tipul int si este reprezentat de _x 
