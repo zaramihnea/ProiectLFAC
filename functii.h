@@ -573,7 +573,7 @@ int Parametrii(char *valoare)
 
 int Facemconst(char *valoare)
 {
-   // printf("da intru aici cu %s \n",valoare);
+   // f("da intru aici cu %s \n",valoare);
     
     nr_consturi++;
     strcpy(consturi[nr_consturi],valoare);

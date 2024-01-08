@@ -257,6 +257,15 @@ variabila : STRNG ID {
     YYABORT;
   }
 }
+| CHARV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+  if(f_EsteDeclarata($2) == -1) 
+    f_Declarare_definitie($2, "char"); 
+  else{
+    yyerror(); 
+    printf("Redefiniti functia\n"); 
+    YYABORT;
+  } 
+}
 | FLOATV FUNCTIE '(' lista_parametri ')' {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "float"); 
@@ -266,6 +275,15 @@ variabila : STRNG ID {
     YYABORT;
   }
 }
+| FLOATV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+  if(f_EsteDeclarata($2) == -1) 
+    f_Declarare_definitie($2, "float"); 
+  else{
+    yyerror(); 
+    printf("Redefiniti functia\n"); 
+    YYABORT;
+  } 
+}
 | BOOLV FUNCTIE '(' lista_parametri ')' {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "bool"); 
@@ -274,6 +292,15 @@ variabila : STRNG ID {
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
+}
+| BOOLV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+  if(f_EsteDeclarata($2) == -1) 
+    f_Declarare_definitie($2, "bool"); 
+  else{
+    yyerror(); 
+    printf("Redefiniti functia\n"); 
+    YYABORT;
+  } 
 }
 | CLASS ID START_CLASA declaratii END_CLASA {
   if(cl_EsteDeclarata($2) == -1) 
