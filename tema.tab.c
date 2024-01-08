@@ -532,11 +532,11 @@ static const yytype_uint16 yyrline[] =
       54,    63,    72,    81,    90,    99,   109,   119,   129,   139,
      149,   158,   167,   176,   185,   194,   203,   212,   221,   233,
      242,   251,   260,   269,   278,   287,   296,   305,   318,   322,
-     326,   330,   337,   338,   342,   345,   348,   351,   357,   360,
-     361,   362,   363,   367,   384,   387,   396,   399,   416,   425,
-     426,   430,   437,   444,   451,   459,   460,   461,   462,   463,
-     472,   473,   483,   486,   489,   492,   495,   501,   513,   514,
-     518,   519,   523,   540,   545,   552,   559,   566,   577,   578
+     326,   330,   337,   338,   342,   345,   348,   351,   358,   361,
+     362,   363,   364,   368,   385,   388,   397,   400,   417,   426,
+     427,   431,   438,   445,   452,   460,   461,   462,   463,   464,
+     473,   474,   484,   487,   490,   493,   496,   502,   514,   515,
+     519,   520,   524,   541,   546,   553,   560,   567,   578,   579
 };
 #endif
 
@@ -2039,33 +2039,33 @@ yyreduce:
   case 44:
 #line 342 "tema.y"
     {
-    Parametru1((yyvsp[(2) - (2)].nume));
+    Parametrii((yyvsp[(2) - (2)].nume), "float");
   ;}
     break;
 
   case 45:
 #line 345 "tema.y"
     {
-    Parametru2((yyvsp[(2) - (2)].nume));
+    Parametrii((yyvsp[(2) - (2)].nume), "char");
   ;}
     break;
 
   case 46:
 #line 348 "tema.y"
     {
-    Parametrii((yyvsp[(2) - (2)].nume));
+    Parametrii((yyvsp[(2) - (2)].nume), "int");
   ;}
     break;
 
   case 47:
 #line 351 "tema.y"
     {
-    Parametru3((yyvsp[(2) - (2)].nume));
+    Parametrii((yyvsp[(2) - (2)].nume), "bool");
   ;}
     break;
 
   case 53:
-#line 367 "tema.y"
+#line 368 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(1) - (3)].nume)) == -1) {
       yyerror(); 
@@ -2086,14 +2086,14 @@ yyreduce:
     break;
 
   case 54:
-#line 384 "tema.y"
+#line 385 "tema.y"
     {
     Eval((yyvsp[(2) - (2)].valoare));
   ;}
     break;
 
   case 55:
-#line 387 "tema.y"
+#line 388 "tema.y"
     {
     if (strcmp((type((yyvsp[(2) - (4)].nume))), "int") == 0) 
       Eval(valoare((yyvsp[(2) - (4)].nume)) + (yyvsp[(4) - (4)].valoare)); 
@@ -2106,14 +2106,14 @@ yyreduce:
     break;
 
   case 56:
-#line 396 "tema.y"
+#line 397 "tema.y"
     {
     print_symbol();
   ;}
     break;
 
   case 57:
-#line 399 "tema.y"
+#line 400 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
       yyerror(); 
@@ -2134,7 +2134,7 @@ yyreduce:
     break;
 
   case 58:
-#line 416 "tema.y"
+#line 417 "tema.y"
     {
     if (Afisare() == 0) 
       printf("Tipul expresiei este int \n"); 
@@ -2144,12 +2144,12 @@ yyreduce:
     break;
 
   case 60:
-#line 426 "tema.y"
+#line 427 "tema.y"
     {;}
     break;
 
   case 61:
-#line 430 "tema.y"
+#line 431 "tema.y"
     {
     if (AdaugVector((yyvsp[(1) - (1)].nume)) == 0) {
       yyerror();  
@@ -2160,7 +2160,7 @@ yyreduce:
     break;
 
   case 62:
-#line 437 "tema.y"
+#line 438 "tema.y"
     {
     if (AdaugareVector((yyvsp[(1) - (1)].valoare)) == 0) {
       yyerror(); 
@@ -2171,7 +2171,7 @@ yyreduce:
     break;
 
   case 63:
-#line 444 "tema.y"
+#line 445 "tema.y"
     {
     if (AdaugareeVector((yyvsp[(1) - (1)].valoare_float)) == 0) {
       yyerror(); 
@@ -2182,7 +2182,7 @@ yyreduce:
     break;
 
   case 69:
-#line 463 "tema.y"
+#line 464 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(1) - (1)].nume)) == -1) {
       yyerror();
@@ -2195,7 +2195,7 @@ yyreduce:
     break;
 
   case 71:
-#line 473 "tema.y"
+#line 474 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
       yyerror();
@@ -2209,35 +2209,35 @@ yyreduce:
     break;
 
   case 72:
-#line 483 "tema.y"
+#line 484 "tema.y"
     {
     inlocuireaInt((yyvsp[(1) - (1)].valoare));
   ;}
     break;
 
   case 73:
-#line 486 "tema.y"
+#line 487 "tema.y"
     {
     inlocuireaString((yyvsp[(1) - (1)].string));
   ;}
     break;
 
   case 74:
-#line 489 "tema.y"
+#line 490 "tema.y"
     {
     inlocuireaFloat((yyvsp[(1) - (1)].valoare_float));
   ;}
     break;
 
   case 75:
-#line 492 "tema.y"
+#line 493 "tema.y"
     {
     inlocuireaBool((yyvsp[(1) - (1)].valoare_bool));
   ;}
     break;
 
   case 76:
-#line 495 "tema.y"
+#line 496 "tema.y"
     {
     if (cl_EsteDeclarata((yyvsp[(1) - (2)].nume)) == -1) {
       yyerror();
@@ -2247,7 +2247,7 @@ yyreduce:
     break;
 
   case 77:
-#line 501 "tema.y"
+#line 502 "tema.y"
     {
     if (v_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
       yyerror();
@@ -2260,7 +2260,7 @@ yyreduce:
     break;
 
   case 79:
-#line 514 "tema.y"
+#line 515 "tema.y"
     {
     VerificareParametru((yyvsp[(1) - (1)].nume));
     FunctieInFunctie();
@@ -2268,7 +2268,7 @@ yyreduce:
     break;
 
   case 81:
-#line 519 "tema.y"
+#line 520 "tema.y"
     {
     printf("%s \n", (yyvsp[(3) - (3)].nume));
     VerificareParametru((yyvsp[(3) - (3)].nume));
@@ -2276,7 +2276,7 @@ yyreduce:
     break;
 
   case 82:
-#line 523 "tema.y"
+#line 524 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
       yyerror();
@@ -2297,7 +2297,7 @@ yyreduce:
     break;
 
   case 84:
-#line 545 "tema.y"
+#line 546 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
       yyerror();
@@ -2308,7 +2308,7 @@ yyreduce:
     break;
 
   case 85:
-#line 552 "tema.y"
+#line 553 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
       yyerror();
@@ -2319,7 +2319,7 @@ yyreduce:
     break;
 
   case 86:
-#line 559 "tema.y"
+#line 560 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
       yyerror();
@@ -2330,7 +2330,7 @@ yyreduce:
     break;
 
   case 87:
-#line 566 "tema.y"
+#line 567 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (15)].nume)) == -1) {
       yyerror();
@@ -2556,7 +2556,7 @@ yyreturn:
 }
 
 
-#line 580 "tema.y"
+#line 581 "tema.y"
 
 
 int yyerror(char * s){

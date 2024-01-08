@@ -340,18 +340,19 @@ lista_parametri: parametru
 
 parametru:
   FLOATV ID {
-    Parametru1($2);
+    Parametrii($2, "float");
   }
   | CHARV ID {
-    Parametru2($2);
+    Parametrii($2, "char");
   }
   | INT ID {
-    Parametrii($2);
+    Parametrii($2, "int");
   }
   | BOOLV ID {
-    Parametru3($2);
+    Parametrii($2, "bool");
   }
   ;
+
 
 
 main_program : BGIN instructiuni END 

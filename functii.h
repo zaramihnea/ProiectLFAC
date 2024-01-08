@@ -541,33 +541,33 @@ void va_string_atribuire(char nume[], char valoare[])
     variabile[declarat].init = 1;
 }
 
-int Parametru1(char *valoare)
-{
-    functii[num_func].nr_parametri++;
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "float");
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-}
+// int Parametru1(char *valoare)
+// {
+//     functii[num_func].nr_parametri++;
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "float");
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
+// }
 
-int Parametru2(char *valoare)
-{
-    functii[num_func].nr_parametri++;
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "char");
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-}
+// int Parametru2(char *valoare)
+// {
+//     functii[num_func].nr_parametri++;
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "char");
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
+// }
 
-int Parametru3(char *valoare)
-{
-    functii[num_func].nr_parametri++;
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "bool");
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-}
+// int Parametru3(char *valoare)
+// {
+//     functii[num_func].nr_parametri++;
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "bool");
+//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
+// }
 
 // funcite pentru parametrii
-int Parametrii(char *valoare)
+int Parametrii(char *valoare, char *tip)
 {
 
     functii[num_func].nr_parametri++;
-    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "int");
+    strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, tip);
     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
 }
 
