@@ -32,7 +32,7 @@
 "{" {return START_CLASA;}
 "}" {return END_CLASA;}
 "end_progr" {return END;}
-_[_a-zA-z][_a-zA-z0-9]* {yylval.nume=strdup(yytext); return ID;}
+$[_a-zA-z][_a-zA-z0-9]* {yylval.nume=strdup(yytext); return ID;}
 [0-9]+ {yylval.valoare=atoi(yytext); return NR; }
 [0-9]+"."[0-9]* {yylval.valoare_float = atof(yytext); return FLOAT;}
 "true"|"false" {yylval.valoare_bool=strdup(yytext); return BOOL;}

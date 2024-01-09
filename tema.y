@@ -5,7 +5,7 @@ extern char* yytext;
 extern int yylineno;
 #include "functii.h"
 int yylex();
-int yyerror();
+int yyerror(char * s);
 
 %}
 %token STRNG INT CHARV BOOLV FLOATV PRINT EVAL CLASS CONST ASSIGN OPERATOR LOGICAL_OPERATOR BGIN IF ELSE THEN ENDIF FOR WHILE OVER DO START_CLASA END_CLASA END ID NR FLOAT BOOL CHAR STRING FUNCTIE VECTOR  TYPEOF
@@ -46,7 +46,7 @@ variabila : STRNG ID {
     if(va_string_EsteDeclarata($2)==-1)
         variabila_string_declarare_only($2);
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -55,7 +55,7 @@ variabila : STRNG ID {
     if(va_char_EsteDeclarata($2)==-1)
         variabila_char_declarare_only($2);
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -64,7 +64,7 @@ variabila : STRNG ID {
     if(va_float_EsteDeclarata($2)==-1)
         variabila_float_declarare_only($2);
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -73,7 +73,7 @@ variabila : STRNG ID {
     if(va_EsteDeclarata($2)==-1)
         variabila_int_declare_only($2);
     else { 
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -82,7 +82,7 @@ variabila : STRNG ID {
     if(va_bool_EsteDeclarata($2)==-1)
         variabila_bool_declare_only($2);
     else { 
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -91,7 +91,7 @@ variabila : STRNG ID {
     if(va_string_EsteDeclarata($2)==-1)
         variabila_string_declarare_only($2);
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -101,7 +101,7 @@ variabila : STRNG ID {
         variabila_string_declarare_init($3,$5);
         Facemconst($3);
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila");
         YYABORT;
     }
@@ -111,7 +111,7 @@ variabila : STRNG ID {
         variabila_int_declare_init($3,$5); 
         Facemconst($3);
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -121,7 +121,7 @@ variabila : STRNG ID {
         variabila_bool_declarare_init($3,$5);
         Facemconst($3);
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -131,7 +131,7 @@ variabila : STRNG ID {
         variabila_float_declarare_init($3,$5); 
         Facemconst($3); 
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -141,7 +141,7 @@ variabila : STRNG ID {
         variabila_char_declarare_init($3,$5);  
         Facemconst($3); 
     } else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -150,7 +150,7 @@ variabila : STRNG ID {
     if(va_EsteDeclarata($2)==-1) 
         variabila_int_declare_init($2,$4);
     else { 
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -159,7 +159,7 @@ variabila : STRNG ID {
     if(va_float_EsteDeclarata($2)==-1) 
         variabila_float_declarare_init($2,$4);
     else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -168,7 +168,7 @@ variabila : STRNG ID {
     if(va_char_EsteDeclarata($2)==-1) 
         variabila_char_declarare_init($2,$4);
     else { 
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -177,7 +177,7 @@ variabila : STRNG ID {
     if(va_bool_EsteDeclarata($2)==-1) 
         variabila_bool_declarare_init($2,$4);
     else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -186,7 +186,7 @@ variabila : STRNG ID {
   if(v_EsteDeclarata($2) == -1) 
     v_Declarare_definitie($2, 'i', $3);
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -195,7 +195,7 @@ variabila : STRNG ID {
   if(v_EsteDeclarata($2) == -1) 
     v_Declarare_definitie($2, 'f', $3);
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -204,7 +204,7 @@ variabila : STRNG ID {
   if(v_EsteDeclarata($2) == -1) 
     v_Declarare_definitie($2, 'c', $3);
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -213,7 +213,7 @@ variabila : STRNG ID {
   if(v_EsteDeclarata($2) == -1) 
     v_Declarare_definitie($2, 'b', $3);
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -221,11 +221,11 @@ variabila : STRNG ID {
 | CHARV FUNCTIE NR ASSIGN STRING {
   if(v_EsteDeclarata($2) == -1) {
     if(vs_decl($2, $3, $5) == -1){
-      yyerror();
+      yyerror("error");
       printf("Depaseste dimensiune vectorului");
     }
   } else {
-    yyerror();
+    yyerror("error");
     printf("Redefiniti functia \n");
     YYABORT;
   }
@@ -234,7 +234,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "int"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -243,7 +243,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "int"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -252,7 +252,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "char"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -261,7 +261,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "char"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -270,7 +270,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "float"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -279,7 +279,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "float"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -288,7 +288,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "bool"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -297,7 +297,7 @@ variabila : STRNG ID {
   if(f_EsteDeclarata($2) == -1) 
     f_Declarare_definitie($2, "bool"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -306,7 +306,7 @@ variabila : STRNG ID {
   if(cl_EsteDeclarata($2) == -1) 
     cl_Declarare_definitie($2); 
   else {
-    yyerror();
+    yyerror("error");
     printf("Redefiniti clasa\n");
     YYABORT;
   }
@@ -365,16 +365,16 @@ instructiuni : instructiune ';'
 
 instructiune: ID ASSIGN right {
     if (va_EsteDeclarata($1) == -1) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Variabila nu a fost declarata\n"); 
       YYABORT;
     } else {
       if (EsteConst($1) == 1) {
-        yyerror(); 
+        yyerror("error"); 
         printf("Variabila %s este de tip const \n", $1); 
         YYABORT; 
       } else if (FacemNegativ($1) == 0) {
-        yyerror(); 
+        yyerror("error"); 
         printf("Asignarea nu a avut loc pentru variabila %s \n", $1);
         YYABORT;
       }
@@ -387,7 +387,7 @@ instructiune: ID ASSIGN right {
     if (strcmp((type($2)), "int") == 0) 
       Eval(valoare($2)); 
     else {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu este de tipul dorit\n");
       YYABORT;
     }
@@ -399,7 +399,7 @@ instructiune: ID ASSIGN right {
     if (strcmp((type($2)), "int") == 0) 
       Eval(valoare($2) + $4); 
     else {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu este de tipul dorit\n");
       YYABORT;
     }
@@ -409,7 +409,7 @@ instructiune: ID ASSIGN right {
   }
   | PRINT ID {
     if(va_EsteDeclarata($2) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -421,22 +421,20 @@ instructiune: ID ASSIGN right {
         print_to_console_char(caracter($2));
       else if (strcmp((type($2)), "bool") == 0) 
         print_to_console_bool(valoare_bool($2));
-      else if (strcmp((type($2)), "string") == 0) 
-        print_to_console_string(valoare_string($2));
     }
   }
   | FUNCTIE '(' apeluri ')' {
     if (f_EsteDeclarata($1) == -1) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Functia nu a fost declarata\n");
       YYABORT;
     } else {
       if (VerificareFunctie($1) == 1) {
-        yyerror();    
+        yyerror("error");    
         printf("Tipul parametrilor nu corespund \n"); 
         YYABORT; 
       } else if (VerificareFunctie($1) == 2) {
-        yyerror();    
+        yyerror("error");    
         printf("Numarul de parametrii nu corespund \n"); 
         YYABORT; 
       }
@@ -458,21 +456,21 @@ expresii : expresii OPERATOR expresie
 expresie:
   ID {
     if (AdaugVector($1) == 0) {
-      yyerror();  
+      yyerror("error");  
       printf("elementele sunt de tip diferit \n");  
       YYABORT;
     }
   }
   | NR {
     if (AdaugareVector($1) == 0) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Nu se poate determina tipul expresiei\n");  
       YYABORT;
     }
   } 
   | FLOAT {
     if (AdaugareeVector($1) == 0) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Nu se poate determina tipul expresiei\n");  
       YYABORT;
     }
@@ -487,7 +485,7 @@ right:
   | '(' right OPERATOR right ')'
   | ID {
     if (va_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -496,7 +494,7 @@ right:
   }
   | ID '+' NR {
     if (va_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -506,7 +504,7 @@ right:
   | CHAR
   | FUNCTIE '(' apeluri ')' {
     if (f_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Functia nu a fost declarata\n");
       YYABORT;
     } else {
@@ -528,13 +526,13 @@ right:
   }
   | ID FUNCTIE {
     if (cl_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Clasa nu a fost declarata");
     }
   }
   | VECTOR '(' NR ')' {
     if (v_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Vectorul nu a fost declarat\n");
       YYABORT;
     } else {
@@ -556,16 +554,16 @@ apeluri:
   }
   | FUNCTIE '(' apeluri ')' {
     if (f_EsteDeclarata($1) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Functia nu a fost declarata\n");
       YYABORT;
     }
     if (VerificaParametruFIF($1) == 1) {
-      yyerror();
+      yyerror("error");
       printf("Tipul parametrilor nu corespund \n");
       YYABORT;
     } else if (VerificareFunctie($1) == 2) {
-      yyerror();
+      yyerror("error");
       printf("Numarul de parametrii nu corespund \n");
       YYABORT;
     }
@@ -578,28 +576,28 @@ apeluri:
 operatie:
   IF ID LOGICAL_OPERATOR right THEN instructiuni continuare_if {
     if (va_EsteDeclarata($2) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
   }
   | IF ID OPERATOR right THEN instructiuni continuare_if {
     if (va_EsteDeclarata($2) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
   }
   | WHILE ID LOGICAL_OPERATOR right DO instructiuni OVER {
     if (va_EsteDeclarata($2) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
   }
   | FOR ID LOGICAL_OPERATOR right ',' ID LOGICAL_OPERATOR right ',' ID OPERATOR OPERATOR DO instructiuni OVER {
     if (va_EsteDeclarata($2) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
@@ -614,7 +612,7 @@ continuare_if : ELSE instructiuni continuare_if
 %%
 
 int yyerror(char * s){
-printf("_err: %s la linia:%d\n",s,yylineno);
+printf("err: %s la linia:%d\n",s,yylineno);
 }
 
 int main(int argc, char** argv){
@@ -622,5 +620,4 @@ int ok=0;
 yyin=fopen(argv[1],"r");
 yyparse();
 print_symbol();
-print_table();
 }

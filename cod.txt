@@ -1,38 +1,40 @@
-class _A {
-    int _xclass <- 3;
-    bool _yclass <- true;
+class $A {
+    int $xclass <- 3;
+    bool $yclass <- true;
 };
 
-int _x <- 3;
-float _y;
-int _a <- 6;
-float _f;
-int _sum <- 0;
-int _abc;
-int _counter <- 0;
-int _max <- 1;
+int @vector 5;
+int $x <- 3;
+float $y;
+int $a <- 6;
+float $f;
+int $sum <- 0;
+int $abc;
+int $counter <- 0;
+int $max <- 1;
 
-int maxi(int _x)[
-    if _max < _x then
-        _max <- _x;
+int maxi(int $x)[
+    if $max < $x then
+        $max <- $x;
     else
-        _x <- _max;
+        $x <- $max;
     endif
 ];
 
 
 begin_progr
-_sum <- _a;
-print _sum;
-print _max;
-maxi(_sum);
-print _max;
+$sum <- $a;
+print $sum;
+print $max;
+print @vector(1);
+maxi($sum);
+print $max;
 Eval 2;
-Eval _max;
+Eval $max;
 TypeOf(2.3);
-TypeOf(_sum);
-TypeOf(_y);
-print _sum;
-print _x;
-print _yclass;
+TypeOf($sum);
+TypeOf($y);
+print $sum;
+print $x;
+print $yclass;
 end_progr

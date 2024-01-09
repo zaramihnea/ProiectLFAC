@@ -148,7 +148,7 @@ extern char* yytext;
 extern int yylineno;
 #include "functii.h"
 int yylex();
-int yyerror();
+int yyerror(char * s);
 
 
 
@@ -536,10 +536,10 @@ static const yytype_uint16 yyrline[] =
      242,   251,   260,   269,   278,   287,   296,   305,   317,   321,
      325,   329,   336,   337,   341,   344,   347,   350,   357,   360,
      361,   362,   363,   366,   383,   386,   395,   398,   407,   410,
-     428,   445,   454,   455,   459,   466,   473,   480,   484,   485,
-     486,   487,   488,   497,   506,   507,   517,   520,   523,   526,
-     529,   535,   547,   548,   552,   553,   557,   574,   579,   586,
-     593,   600,   611,   612
+     426,   443,   452,   453,   457,   464,   471,   478,   482,   483,
+     484,   485,   486,   495,   504,   505,   515,   518,   521,   524,
+     527,   533,   545,   546,   550,   551,   555,   572,   577,   584,
+     591,   598,   609,   610
 };
 #endif
 
@@ -1635,7 +1635,7 @@ yyreduce:
     if(va_string_EsteDeclarata((yyvsp[(2) - (2)].nume))==-1)
         variabila_string_declarare_only((yyvsp[(2) - (2)].nume));
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1648,7 +1648,7 @@ yyreduce:
     if(va_char_EsteDeclarata((yyvsp[(2) - (2)].nume))==-1)
         variabila_char_declarare_only((yyvsp[(2) - (2)].nume));
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1661,7 +1661,7 @@ yyreduce:
     if(va_float_EsteDeclarata((yyvsp[(2) - (2)].nume))==-1)
         variabila_float_declarare_only((yyvsp[(2) - (2)].nume));
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1674,7 +1674,7 @@ yyreduce:
     if(va_EsteDeclarata((yyvsp[(2) - (2)].nume))==-1)
         variabila_int_declare_only((yyvsp[(2) - (2)].nume));
     else { 
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1687,7 +1687,7 @@ yyreduce:
     if(va_bool_EsteDeclarata((yyvsp[(2) - (2)].nume))==-1)
         variabila_bool_declare_only((yyvsp[(2) - (2)].nume));
     else { 
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1700,7 +1700,7 @@ yyreduce:
     if(va_string_EsteDeclarata((yyvsp[(2) - (4)].nume))==-1)
         variabila_string_declarare_only((yyvsp[(2) - (4)].nume));
     else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1714,7 +1714,7 @@ yyreduce:
         variabila_string_declarare_init((yyvsp[(3) - (5)].nume),(yyvsp[(5) - (5)].string));
         Facemconst((yyvsp[(3) - (5)].nume));
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila");
         YYABORT;
     }
@@ -1728,7 +1728,7 @@ yyreduce:
         variabila_int_declare_init((yyvsp[(3) - (5)].nume),(yyvsp[(5) - (5)].valoare)); 
         Facemconst((yyvsp[(3) - (5)].nume));
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1742,7 +1742,7 @@ yyreduce:
         variabila_bool_declarare_init((yyvsp[(3) - (5)].nume),(yyvsp[(5) - (5)].valoare_bool));
         Facemconst((yyvsp[(3) - (5)].nume));
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1756,7 +1756,7 @@ yyreduce:
         variabila_float_declarare_init((yyvsp[(3) - (5)].nume),(yyvsp[(5) - (5)].valoare_float)); 
         Facemconst((yyvsp[(3) - (5)].nume)); 
     } else {
-        yyerror();
+        yyerror("error");
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1770,7 +1770,7 @@ yyreduce:
         variabila_char_declarare_init((yyvsp[(3) - (5)].nume),(yyvsp[(5) - (5)].caracter));  
         Facemconst((yyvsp[(3) - (5)].nume)); 
     } else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1783,7 +1783,7 @@ yyreduce:
     if(va_EsteDeclarata((yyvsp[(2) - (4)].nume))==-1) 
         variabila_int_declare_init((yyvsp[(2) - (4)].nume),(yyvsp[(4) - (4)].valoare));
     else { 
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1796,7 +1796,7 @@ yyreduce:
     if(va_float_EsteDeclarata((yyvsp[(2) - (4)].nume))==-1) 
         variabila_float_declarare_init((yyvsp[(2) - (4)].nume),(yyvsp[(4) - (4)].valoare_float));
     else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1809,7 +1809,7 @@ yyreduce:
     if(va_char_EsteDeclarata((yyvsp[(2) - (4)].nume))==-1) 
         variabila_char_declarare_init((yyvsp[(2) - (4)].nume),(yyvsp[(4) - (4)].caracter));
     else { 
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1822,7 +1822,7 @@ yyreduce:
     if(va_bool_EsteDeclarata((yyvsp[(2) - (4)].nume))==-1) 
         variabila_bool_declarare_init((yyvsp[(2) - (4)].nume),(yyvsp[(4) - (4)].valoare_bool));
     else {
-        yyerror(); 
+        yyerror("error"); 
         printf("Redefiniti variabila\n");
         YYABORT;
     }
@@ -1835,7 +1835,7 @@ yyreduce:
   if(v_EsteDeclarata((yyvsp[(2) - (3)].nume)) == -1) 
     v_Declarare_definitie((yyvsp[(2) - (3)].nume), 'i', (yyvsp[(3) - (3)].valoare));
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -1848,7 +1848,7 @@ yyreduce:
   if(v_EsteDeclarata((yyvsp[(2) - (3)].nume)) == -1) 
     v_Declarare_definitie((yyvsp[(2) - (3)].nume), 'f', (yyvsp[(3) - (3)].valoare));
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -1861,7 +1861,7 @@ yyreduce:
   if(v_EsteDeclarata((yyvsp[(2) - (3)].nume)) == -1) 
     v_Declarare_definitie((yyvsp[(2) - (3)].nume), 'c', (yyvsp[(3) - (3)].valoare));
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -1874,7 +1874,7 @@ yyreduce:
   if(v_EsteDeclarata((yyvsp[(2) - (3)].nume)) == -1) 
     v_Declarare_definitie((yyvsp[(2) - (3)].nume), 'b', (yyvsp[(3) - (3)].valoare));
   else {
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti structura\n");
     YYABORT;
   }
@@ -1886,11 +1886,11 @@ yyreduce:
     {
   if(v_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) {
     if(vs_decl((yyvsp[(2) - (5)].nume), (yyvsp[(3) - (5)].valoare), (yyvsp[(5) - (5)].string)) == -1){
-      yyerror();
+      yyerror("error");
       printf("Depaseste dimensiune vectorului");
     }
   } else {
-    yyerror();
+    yyerror("error");
     printf("Redefiniti functia \n");
     YYABORT;
   }
@@ -1903,7 +1903,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (5)].nume), "int"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -1916,7 +1916,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (8)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (8)].nume), "int"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -1929,7 +1929,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (5)].nume), "char"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -1942,7 +1942,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (8)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (8)].nume), "char"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -1955,7 +1955,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (5)].nume), "float"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -1968,7 +1968,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (8)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (8)].nume), "float"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -1981,7 +1981,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (5)].nume), "bool"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   }
@@ -1994,7 +1994,7 @@ yyreduce:
   if(f_EsteDeclarata((yyvsp[(2) - (8)].nume)) == -1) 
     f_Declarare_definitie((yyvsp[(2) - (8)].nume), "bool"); 
   else{
-    yyerror(); 
+    yyerror("error"); 
     printf("Redefiniti functia\n"); 
     YYABORT;
   } 
@@ -2007,7 +2007,7 @@ yyreduce:
   if(cl_EsteDeclarata((yyvsp[(2) - (5)].nume)) == -1) 
     cl_Declarare_definitie((yyvsp[(2) - (5)].nume)); 
   else {
-    yyerror();
+    yyerror("error");
     printf("Redefiniti clasa\n");
     YYABORT;
   }
@@ -2078,16 +2078,16 @@ yyreduce:
 #line 366 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(1) - (3)].nume)) == -1) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Variabila nu a fost declarata\n"); 
       YYABORT;
     } else {
       if (EsteConst((yyvsp[(1) - (3)].nume)) == 1) {
-        yyerror(); 
+        yyerror("error"); 
         printf("Variabila %s este de tip const \n", (yyvsp[(1) - (3)].nume)); 
         YYABORT; 
       } else if (FacemNegativ((yyvsp[(1) - (3)].nume)) == 0) {
-        yyerror(); 
+        yyerror("error"); 
         printf("Asignarea nu a avut loc pentru variabila %s \n", (yyvsp[(1) - (3)].nume));
         YYABORT;
       }
@@ -2108,7 +2108,7 @@ yyreduce:
     if (strcmp((type((yyvsp[(2) - (2)].nume))), "int") == 0) 
       Eval(valoare((yyvsp[(2) - (2)].nume))); 
     else {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu este de tipul dorit\n");
       YYABORT;
     }
@@ -2128,7 +2128,7 @@ yyreduce:
     if (strcmp((type((yyvsp[(2) - (4)].nume))), "int") == 0) 
       Eval(valoare((yyvsp[(2) - (4)].nume)) + (yyvsp[(4) - (4)].valoare)); 
     else {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu este de tipul dorit\n");
       YYABORT;
     }
@@ -2146,7 +2146,7 @@ yyreduce:
 #line 410 "tema.y"
     {
     if(va_EsteDeclarata((yyvsp[(2) - (2)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -2158,26 +2158,24 @@ yyreduce:
         print_to_console_char(caracter((yyvsp[(2) - (2)].nume)));
       else if (strcmp((type((yyvsp[(2) - (2)].nume))), "bool") == 0) 
         print_to_console_bool(valoare_bool((yyvsp[(2) - (2)].nume)));
-      else if (strcmp((type((yyvsp[(2) - (2)].nume))), "string") == 0) 
-        print_to_console_string(valoare_string((yyvsp[(2) - (2)].nume)));
     }
   ;}
     break;
 
   case 60:
-#line 428 "tema.y"
+#line 426 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Functia nu a fost declarata\n");
       YYABORT;
     } else {
       if (VerificareFunctie((yyvsp[(1) - (4)].nume)) == 1) {
-        yyerror();    
+        yyerror("error");    
         printf("Tipul parametrilor nu corespund \n"); 
         YYABORT; 
       } else if (VerificareFunctie((yyvsp[(1) - (4)].nume)) == 2) {
-        yyerror();    
+        yyerror("error");    
         printf("Numarul de parametrii nu corespund \n"); 
         YYABORT; 
       }
@@ -2186,7 +2184,7 @@ yyreduce:
     break;
 
   case 61:
-#line 445 "tema.y"
+#line 443 "tema.y"
     {
     if (Afisare() == 0) 
       printf("Tipul expresiei este int \n"); 
@@ -2196,10 +2194,10 @@ yyreduce:
     break;
 
   case 64:
-#line 459 "tema.y"
+#line 457 "tema.y"
     {
     if (AdaugVector((yyvsp[(1) - (1)].nume)) == 0) {
-      yyerror();  
+      yyerror("error");  
       printf("elementele sunt de tip diferit \n");  
       YYABORT;
     }
@@ -2207,10 +2205,10 @@ yyreduce:
     break;
 
   case 65:
-#line 466 "tema.y"
+#line 464 "tema.y"
     {
     if (AdaugareVector((yyvsp[(1) - (1)].valoare)) == 0) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Nu se poate determina tipul expresiei\n");  
       YYABORT;
     }
@@ -2218,10 +2216,10 @@ yyreduce:
     break;
 
   case 66:
-#line 473 "tema.y"
+#line 471 "tema.y"
     {
     if (AdaugareeVector((yyvsp[(1) - (1)].valoare_float)) == 0) {
-      yyerror(); 
+      yyerror("error"); 
       printf("Nu se poate determina tipul expresiei\n");  
       YYABORT;
     }
@@ -2229,10 +2227,10 @@ yyreduce:
     break;
 
   case 72:
-#line 488 "tema.y"
+#line 486 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(1) - (1)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -2242,10 +2240,10 @@ yyreduce:
     break;
 
   case 73:
-#line 497 "tema.y"
+#line 495 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(1) - (3)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     } else {
@@ -2255,10 +2253,10 @@ yyreduce:
     break;
 
   case 75:
-#line 507 "tema.y"
+#line 505 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Functia nu a fost declarata\n");
       YYABORT;
     } else {
@@ -2269,48 +2267,48 @@ yyreduce:
     break;
 
   case 76:
-#line 517 "tema.y"
+#line 515 "tema.y"
     {
     inlocuireaInt((yyvsp[(1) - (1)].valoare));
   ;}
     break;
 
   case 77:
-#line 520 "tema.y"
+#line 518 "tema.y"
     {
     inlocuireaString((yyvsp[(1) - (1)].string));
   ;}
     break;
 
   case 78:
-#line 523 "tema.y"
+#line 521 "tema.y"
     {
     inlocuireaFloat((yyvsp[(1) - (1)].valoare_float));
   ;}
     break;
 
   case 79:
-#line 526 "tema.y"
+#line 524 "tema.y"
     {
     inlocuireaBool((yyvsp[(1) - (1)].valoare_bool));
   ;}
     break;
 
   case 80:
-#line 529 "tema.y"
+#line 527 "tema.y"
     {
     if (cl_EsteDeclarata((yyvsp[(1) - (2)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Clasa nu a fost declarata");
     }
   ;}
     break;
 
   case 81:
-#line 535 "tema.y"
+#line 533 "tema.y"
     {
     if (v_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Vectorul nu a fost declarat\n");
       YYABORT;
     } else {
@@ -2320,7 +2318,7 @@ yyreduce:
     break;
 
   case 83:
-#line 548 "tema.y"
+#line 546 "tema.y"
     {
     VerificareParametru((yyvsp[(1) - (1)].nume));
     FunctieInFunctie();
@@ -2328,7 +2326,7 @@ yyreduce:
     break;
 
   case 85:
-#line 553 "tema.y"
+#line 551 "tema.y"
     {
     printf("%s \n", (yyvsp[(3) - (3)].nume));
     VerificareParametru((yyvsp[(3) - (3)].nume));
@@ -2336,19 +2334,19 @@ yyreduce:
     break;
 
   case 86:
-#line 557 "tema.y"
+#line 555 "tema.y"
     {
     if (f_EsteDeclarata((yyvsp[(1) - (4)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Functia nu a fost declarata\n");
       YYABORT;
     }
     if (VerificaParametruFIF((yyvsp[(1) - (4)].nume)) == 1) {
-      yyerror();
+      yyerror("error");
       printf("Tipul parametrilor nu corespund \n");
       YYABORT;
     } else if (VerificareFunctie((yyvsp[(1) - (4)].nume)) == 2) {
-      yyerror();
+      yyerror("error");
       printf("Numarul de parametrii nu corespund \n");
       YYABORT;
     }
@@ -2357,10 +2355,10 @@ yyreduce:
     break;
 
   case 88:
-#line 579 "tema.y"
+#line 577 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
@@ -2368,10 +2366,10 @@ yyreduce:
     break;
 
   case 89:
-#line 586 "tema.y"
+#line 584 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
@@ -2379,10 +2377,10 @@ yyreduce:
     break;
 
   case 90:
-#line 593 "tema.y"
+#line 591 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (7)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
@@ -2390,10 +2388,10 @@ yyreduce:
     break;
 
   case 91:
-#line 600 "tema.y"
+#line 598 "tema.y"
     {
     if (va_EsteDeclarata((yyvsp[(2) - (15)].nume)) == -1) {
-      yyerror();
+      yyerror("error");
       printf("Variabila nu a fost declarata\n");
       YYABORT;
     }
@@ -2402,7 +2400,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2406 "tema.tab.c"
+#line 2404 "tema.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2616,7 +2614,7 @@ yyreturn:
 }
 
 
-#line 614 "tema.y"
+#line 612 "tema.y"
 
 
 int yyerror(char * s){

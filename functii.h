@@ -101,11 +101,13 @@ void print_symbol()
     printf("Modificam fisierul symbol_table.txt\n");
     ffout = fopen("symbol_table.txt", "w");
 
+    fprintf(ffout, "~~~Symbol Table~~~\n");
+
     // afisam  toate variabilele din fisier si tipul acestora
     for (int i = 0; i < num_var; i++)
     {
 
-        fprintf(ffout, "variabila : %s de tip %s care are valoarea", variabile[i].nume, variabile[i].tip);
+        fprintf(ffout, "var : %s tip %s are valoarea", variabile[i].nume, variabile[i].tip);
         if (strcmp(variabile[i].tip, "int") == 0)
             fprintf(ffout, "= %d\n", variabile[i].int_valoare);
 
@@ -126,7 +128,17 @@ void print_symbol()
     // afisam toti vectorii din fisier si tipul acestora
     for (int i = 0; i < num_vect; i++)
         fprintf(ffout, "Vectorul %s este de tipul %s cu size-ul %d\n", vectori[i].nume, vectori[i].tip, vectori[i].dimensiune);
-
+    // afisam toate functiile din fisier
+    for (int i = 1; i <= num_func; i++) // pt functia cu numarul i avem numele ei, tipul ei si nr de parametrii pe care il are
+    {
+        fprintf(ffout, "Functia cu numele %s de tip %s are %d parametri(u) \n", functii[i].nume, functii[i].tip, functii[i - 1].nr_parametri);
+        for (int j = 1; j <= functii[i].nr_parametri + 1; j++) // pt primu parametru din functia i afisez tipul parametrului si parametrul in sine
+            if (strlen(functii[i - 1].Param[j].tipParametri) != 0)
+            {
+                fprintf(ffout, "Parametrul %s este de tipul %s\n",functii[i - 1].Param[j].parametri, functii[i - 1].Param[j].tipParametri);
+            }
+    }
+    fclose(ffout);
     
 
     fclose(ffout);
@@ -137,17 +149,7 @@ void print_symbol()
 void print_table()
 {
     printf("Modificam fisierul symbol_table_functions.txt\n");
-    ffout = fopen("symbol_table_functions.txt", "w");
-    for (int i = 1; i <= num_func; i++) // pt functia cu numarul i avem numele ei, tipul ei si nr de parametrii pe care il are
-    {
-        fprintf(ffout, "Pentru functia cu numele %s de tip %s avem urmatorii %d parametrii \n", functii[i].nume, functii[i].tip, functii[i - 1].nr_parametri);
-        for (int j = 1; j <= functii[i].nr_parametri + 1; j++) // pt primu parametru din functia i afisez tipul parametrului si parametrul in sine
-            if (strlen(functii[i - 1].Param[j].tipParametri) != 0)
-            {
-                fprintf(ffout, "Parametrul este de tipul %s si este reprezentat de %s \n", functii[i - 1].Param[j].tipParametri, functii[i - 1].Param[j].parametri);
-            }
-    }
-    fclose(ffout);
+    
 }
 
 // functie de declarare clasa
@@ -183,13 +185,6 @@ int valoare_bool(char nume[])
     for (int i = 0; i < num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
             return variabile[i].valoare_bool;
-}
-
-int valoare_string(char nume[])
-{
-    for (int i = 0; i < num_var; i++)
-        if (strcmp(variabile[i].nume, nume) == 0)
-            return variabile[i].string_valoare;
 }
 
 void print_to_console_int(int a){
@@ -601,27 +596,6 @@ void va_string_atribuire(char nume[], char valoare[])
     strcpy(variabile[declarat].string_valoare, valoare);
     variabile[declarat].init = 1;
 }
-
-// int Parametru1(char *valoare)
-// {
-//     functii[num_func].nr_parametri++;
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "float");
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-// }
-
-// int Parametru2(char *valoare)
-// {
-//     functii[num_func].nr_parametri++;
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "char");
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-// }
-
-// int Parametru3(char *valoare)
-// {
-//     functii[num_func].nr_parametri++;
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].tipParametri, "bool");
-//     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
-// }
 
 // funcite pentru parametrii
 int Parametrii(char *valoare, char *tip)
