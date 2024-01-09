@@ -386,6 +386,15 @@ instructiune: ID ASSIGN right {
   | EVAL ID {
     if (strcmp((type($2)), "int") == 0) 
       Eval(valoare($2)); 
+    else if(strcmp((type($2)), "float") == 0){
+      Eval_Float(valoare_float($2));
+    }
+    else if(strcmp((type($2)), "char") == 0){
+      Eval_Char(caracter($2));
+    }
+    else if(strcmp((type($2)), "bool") == 0){
+      Eval_bool(valoare_bool($2));
+    }
     else {
       yyerror("error");
       printf("Variabila nu este de tipul dorit\n");
@@ -403,6 +412,9 @@ instructiune: ID ASSIGN right {
       printf("Variabila nu este de tipul dorit\n");
       YYABORT;
     }
+  }
+  | EVAL CHAR {
+    Eval_Char($2);
   }
   | PRINT {
     print_symbol();

@@ -2,10 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
-void Eval(int a)
-{
-    printf("S-a apelat functia Eval cu valoarea %d\n", a);
-}
+
 FILE *ffout;
 int num_var = 0;   // contor variabile
 int num_vect = 0;  // contor vectori;
@@ -119,6 +116,7 @@ void print_symbol()
 
         else if (strcmp(variabile[i].tip, "bool") == 0)
             fprintf(ffout, "=%d\n", variabile[i].valoare_bool);
+            
         else if (strcmp(variabile[i].tip, "string") == 0)
             fprintf(ffout, "=%s\n", variabile[i].string_valoare);
     }
@@ -626,14 +624,13 @@ int EsteConst(char valoare[])
  
     if(strcmp(consturi[i],valoare)==0)
         {
-            //printf("Variabila %s este de tip const si nu isi poate modifica valoarea\n", valoare);
+            
             return 1;}
         return 0;
          
 }
 
 void assignsum(char nume[], int b){
-    //add b to the value of nume in variable vector
     int i;
     for(i=0;i<=num_var;i++)
         if(strcmp(nume,variabile[i].nume)==0)
@@ -995,4 +992,24 @@ int Afisare()
         }
        return 2;
 
+}
+
+void Eval(int a)
+{
+    printf("S-a apelat functia Eval cu valoarea %d\n", a);
+}
+void Eval_Char(char a)
+{
+    printf("S-a apelat functia Eval cu valoarea %c\n", a);
+}
+void Eval_Float(float a)
+{
+    printf("S-a apelat functia Eval cu valoarea %f\n", a);
+}
+void Eval_bool(bool a)
+{
+    if (a == 1)
+        printf("S-a apelat functia Eval cu valoarea true\n");
+    else
+        printf("S-a apelat functia Eval cu valoarea false\n");
 }

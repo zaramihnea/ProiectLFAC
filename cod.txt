@@ -6,12 +6,16 @@ class $A {
 int @vector 5;
 int $x <- 3;
 float $y;
+const int $my_const <- 19;
 int $a <- 6;
 float $f;
 int $sum <- 0;
 int $abc;
 int $counter <- 0;
 int $max <- 1;
+char $c <- 'a';
+float $fvar1 <- 2.3;
+float $fvar2 <- 3.4;
 
 int maxi(int $x)[
     if $max < $x then
@@ -21,15 +25,15 @@ int maxi(int $x)[
     endif
 ];
 
-
 begin_progr
 $sum <- $a;
 print $sum;
 print $max;
-print @vector(1);
 maxi($sum);
 print $max;
 Eval 2;
+Eval $c;
+Eval $yclass;
 Eval $max;
 TypeOf(2.3);
 TypeOf($sum);
