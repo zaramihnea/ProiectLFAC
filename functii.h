@@ -633,11 +633,27 @@ int isconst(char valoare[])
 void assignsum(char nume[], int b){
     int i;
     for(i=0;i<=num_var;i++)
-        if(strcmp(nume,variabile[i].nume)==0)
+        if(strcmp(nume, variabile[i].nume)==0)
             break;
-    variabile[i].int_valoare+=b;
+    variabile[i].int_valoare =  b;
 }
 
+void assignid(char nume1[], char nume2[], char nume3[]){
+    //add the sum of nume2 and nume3 to nume1
+    int i;
+    for(i=0;i<=num_var;i++)
+        if(strcmp(nume1, variabile[i].nume)==0)
+            break;
+    int j;
+    for(j=0;j<=num_var;j++)
+        if(strcmp(nume2, variabile[j].nume)==0)
+            break;
+    int k;
+    for(k=0;k<=num_var;k++)
+        if(strcmp(nume3, variabile[k].nume)==0)
+            break;
+    variabile[i].int_valoare = variabile[j].int_valoare + variabile[k].int_valoare;
+}
 int AsignamValoare(char valoare[])
 {
     for (int i = 0; i <= num_var; i++)

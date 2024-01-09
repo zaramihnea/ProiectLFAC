@@ -18,6 +18,7 @@ int $max <- 1;
 char $c <- 'a';
 float $fvar1 <- 2.3;
 float $fvar2 <- 3.4;
+int $intvar1 <- 2;
 
 global_func
 int maxi(int $x)[
@@ -39,6 +40,14 @@ Eval 2;
 Eval $c;
 Eval $yclass;
 Eval $max;
+if $sum = 6 then
+    $sum <- 5;
+endif
+print $a;
+$x <- $x + 3;
+while $a > 0 do
+    $a <- $a - 1;
+over 
 TypeOf(2.3);
 TypeOf($sum);
 TypeOf($y);

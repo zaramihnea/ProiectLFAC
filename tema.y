@@ -448,6 +448,62 @@ instructiune: ID ASSIGN right {
       }
     } 
   }
+  | ID ASSIGN ID '+' ID{
+    if (va_EsteDeclarata($1) == -1) {
+      yyerror("error"); 
+      printf("Variabila nu a fost declarata\n"); 
+      YYABORT;
+    } else if (isconst($1) == 1) {
+        yyerror("error"); 
+        printf("Variabila %s este de tip const \n", $1); 
+        YYABORT; 
+      } 
+    else {
+        assignid($1, $3, $5);
+    }
+  }
+  | ID ASSIGN NR '+' NR{
+    if (va_EsteDeclarata($1) == -1) {
+      yyerror("error"); 
+      printf("Variabila nu a fost declarata\n"); 
+      YYABORT;
+    } else if (isconst($1) == 1) {
+        yyerror("error"); 
+        printf("Variabila %s este de tip const \n", $1); 
+        YYABORT; 
+    } 
+    else{
+        assignsum($1, $3 + $5);
+    }
+  }
+  | ID ASSIGN ID '+' NR{
+    if (va_EsteDeclarata($1) == -1) {
+      yyerror("error"); 
+      printf("Variabila nu a fost declarata\n"); 
+      YYABORT;
+    } else if (isconst($1) == 1) {
+        yyerror("error"); 
+        printf("Variabila %s este de tip const \n", $1); 
+        YYABORT; 
+    } 
+    else {
+        assignsum($1, valoare_int($3) + $5);
+    }
+  }
+  | ID ASSIGN NR '+' ID{
+    if (va_EsteDeclarata($1) == -1) {
+      yyerror("error"); 
+      printf("Variabila nu a fost declarata\n"); 
+      YYABORT;
+    } else if (isconst($1) == 1) {
+        yyerror("error"); 
+        printf("Variabila %s este de tip const \n", $1); 
+        YYABORT; 
+      } 
+    else {
+       assignsum($1, $3 + valoare_int($5));
+    }
+  }
   | EVAL NR {
     Eval($2);
   }
@@ -570,15 +626,6 @@ right:
       YYABORT;
     } else {
       IdprimesteId($1);
-    }
-  }
-  | ID '+' NR {
-    if (va_EsteDeclarata($1) == -1) {
-      yyerror("error");
-      printf("Variabila nu a fost declarata\n");
-      YYABORT;
-    } else {
-      assignsum($1, $3);
     }
   }
   | CHAR
