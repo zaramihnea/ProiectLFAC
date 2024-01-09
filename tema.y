@@ -29,9 +29,12 @@ char* string;
 %start progr
 %%
 
-progr: UTYPE usert GVAR globvar GFUNC globfunc main_program {printf("Program corect sintactic!\n");}
+progr: UTYPE usert GVAR globvar GFUNC globfunc main_program {
+  printf("Program corect sintactic!\n");
+}
 
-usert: functie START_CLASA instructiuni END_CLASA
+usert: /* epsilon */
+  | functie START_CLASA instructiuni END_CLASA
   | usert functie START_CLASA instructiuni END_CLASA
   | CLASS ID START_CLASA interior_clasa END_CLASA ';' {
     if(cl_EsteDeclarata($2) == -1) 
@@ -104,12 +107,14 @@ interior_clasa: variabila ';'
   }
   | BOOLV FUNCTIE '(' lista_parametri
 
-globvar: variabila ';'
-    | globvar variabila ';'
+globvar: /* epsilon */
+  | variabila ';'
+  | globvar variabila ';'
 
-globfunc: functie START_FUNC instructiuni END_FUNC ';'
-    | globfunc functie START_FUNC instructiuni END_FUNC ';'
-    | INT FUNCTIE '(' lista_parametri ')' ';'{ 
+globfunc: /* epsilon */
+  | functie START_FUNC instructiuni END_FUNC ';'
+  | globfunc functie START_FUNC instructiuni END_FUNC ';'
+  | INT FUNCTIE '(' lista_parametri ')' ';'{ 
       if(f_EsteDeclarata($2) == -1) 
         f_Declarare_definitie($2, "int"); 
       else{
@@ -422,6 +427,8 @@ instructiuni : instructiune ';'
              | instructiuni instructiune ';'
              | operatie 
              | instructiuni operatie 
+             | variabila ';'
+             | instructiuni variabila ';'
              ;
 
 instructiune: ID ASSIGN right {

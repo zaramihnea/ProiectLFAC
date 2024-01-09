@@ -29,6 +29,7 @@ int maxi(int $x)[
 ];
 
 begin_progr
+int $mainvar;
 $sum <- $a;
 print $sum;
 print $max;
