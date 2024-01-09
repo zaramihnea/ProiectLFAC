@@ -1,8 +1,10 @@
+user_types
 class $A {
     int $xclass <- 3;
     bool $yclass <- true;
 };
 
+global_var
 int @vector 5;
 int $x <- 3;
 float $y;
@@ -17,6 +19,7 @@ char $c <- 'a';
 float $fvar1 <- 2.3;
 float $fvar2 <- 3.4;
 
+global_func
 int maxi(int $x)[
     if $max < $x then
         $max <- $x;

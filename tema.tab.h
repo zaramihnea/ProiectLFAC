@@ -71,7 +71,12 @@
      STRING = 287,
      FUNCTIE = 288,
      VECTOR = 289,
-     TYPEOF = 290
+     UTYPE = 290,
+     GVAR = 291,
+     GFUNC = 292,
+     START_FUNC = 293,
+     END_FUNC = 294,
+     TYPEOF = 295
    };
 #endif
 /* Tokens.  */
@@ -107,7 +112,12 @@
 #define STRING 287
 #define FUNCTIE 288
 #define VECTOR 289
-#define TYPEOF 290
+#define UTYPE 290
+#define GVAR 291
+#define GFUNC 292
+#define START_FUNC 293
+#define END_FUNC 294
+#define TYPEOF 295
 
 
 
@@ -124,7 +134,7 @@ char* nume;
 char* string;
 }
 /* Line 1529 of yacc.c.  */
-#line 128 "tema.tab.h"
+#line 138 "tema.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -20,6 +20,9 @@
 "+"|"-"|"*"|"/"|"%" {return OPERATOR;}
 "<"|">"|"<="|">="|"="|"si"|"sau" {return LOGICAL_OPERATOR;}
 
+"user_types" {return UTYPE;}
+"global_var" {return GVAR;}
+"global_func" {return GFUNC;}
 "begin_progr" {return BGIN;}
 "if" {return IF;}
 "else" {return ELSE;}
@@ -29,6 +32,8 @@
 "while" {return WHILE;}
 "over" {return OVER;}
 "do" {return DO;}
+"[" {return START_FUNC;}
+"]" {return END_FUNC;}
 "{" {return START_CLASA;}
 "}" {return END_CLASA;}
 "end_progr" {return END;}

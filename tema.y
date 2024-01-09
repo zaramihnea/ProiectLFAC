@@ -8,7 +8,7 @@ int yylex();
 int yyerror(char * s);
 
 %}
-%token STRNG INT CHARV BOOLV FLOATV PRINT EVAL CLASS CONST ASSIGN OPERATOR LOGICAL_OPERATOR BGIN IF ELSE THEN ENDIF FOR WHILE OVER DO START_CLASA END_CLASA END ID NR FLOAT BOOL CHAR STRING FUNCTIE VECTOR  TYPEOF
+%token STRNG INT CHARV BOOLV FLOATV PRINT EVAL CLASS CONST ASSIGN OPERATOR LOGICAL_OPERATOR BGIN IF ELSE THEN ENDIF FOR WHILE OVER DO START_CLASA END_CLASA END ID NR FLOAT BOOL CHAR STRING FUNCTIE VECTOR UTYPE GVAR GFUNC START_FUNC END_FUNC TYPEOF
 %union 
 {
 int valoare;
@@ -29,17 +29,159 @@ char* string;
 %start progr
 %%
 
-progr: declaratii main_program {printf("Program corect sintactic!\n");}
+progr: UTYPE usert GVAR globvar GFUNC globfunc main_program {printf("Program corect sintactic!\n");}
 
-declaratii : declaratie ';'
-           | declaratii declaratie ';'
-           | functie START_CLASA instructiuni END_CLASA
-           | declaratii functie START_CLASA instructiuni END_CLASA
-           ;
+usert: functie START_CLASA instructiuni END_CLASA
+  | usert functie START_CLASA instructiuni END_CLASA
+  | CLASS ID START_CLASA interior_clasa END_CLASA ';' {
+    if(cl_EsteDeclarata($2) == -1) 
+      cl_Declarare_definitie($2); 
+    else {
+      yyerror("error");
+      printf("Redefiniti clasa\n");
+      YYABORT;
+    }
+  }
+  ;
 
-declaratie : variabila 
-           | declaratie ',' variabila
-           ;
+interior_clasa: variabila ';'
+  | interior_clasa variabila ';'
+  | functie START_CLASA instructiuni END_CLASA
+  | interior_clasa functie START_CLASA instructiuni END_CLASA
+  | INT FUNCTIE '(' lista_parametri ')' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "int"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | INT FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "int"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | CHARV FUNCTIE '(' lista_parametri ')' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "char"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | CHARV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "char"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | FLOATV FUNCTIE '(' lista_parametri ')' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "float"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | FLOATV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' {
+    if(f_EsteDeclarata($2) == -1) 
+      f_Declarare_definitie($2, "float"); 
+    else {
+      yyerror("error");
+      printf("Redefiniti functia\n");
+      YYABORT;
+    }
+  }
+  | BOOLV FUNCTIE '(' lista_parametri
+
+globvar: variabila ';'
+    | globvar variabila ';'
+
+globfunc: functie START_FUNC instructiuni END_FUNC ';'
+    | globfunc functie START_FUNC instructiuni END_FUNC ';'
+    | INT FUNCTIE '(' lista_parametri ')' ';'{ 
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "int"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      } 
+    }
+    | INT FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "int"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      } 
+    }
+    | CHARV FUNCTIE '(' lista_parametri ')' {
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "char"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      }
+    }
+    | CHARV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "char"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      } 
+    }
+    | FLOATV FUNCTIE '(' lista_parametri ')' {
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "float"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      }
+    }
+    | FLOATV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "float"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      } 
+    }
+    | BOOLV FUNCTIE '(' lista_parametri ')' {
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "bool"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      }
+    }
+    | BOOLV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
+      if(f_EsteDeclarata($2) == -1) 
+        f_Declarare_definitie($2, "bool"); 
+      else{
+        yyerror("error"); 
+        printf("Redefiniti functia\n"); 
+        YYABORT;
+      } 
+    }
+    ;
 
 
 variabila : STRNG ID {
@@ -99,7 +241,7 @@ variabila : STRNG ID {
 | CONST STRNG ID ASSIGN STRING { 
     if(va_string_EsteDeclarata($3)==-1) {
         variabila_string_declarare_init($3,$5);
-        Facemconst($3);
+        makeconst($3);
     } else {
         yyerror("error");
         printf("Redefiniti variabila");
@@ -109,7 +251,7 @@ variabila : STRNG ID {
 | CONST INT ID ASSIGN NR {
     if(va_EsteDeclarata($3)==-1) {
         variabila_int_declare_init($3,$5); 
-        Facemconst($3);
+        makeconst($3);
     } else {
         yyerror("error");
         printf("Redefiniti variabila\n");
@@ -119,7 +261,7 @@ variabila : STRNG ID {
 | CONST BOOLV ID ASSIGN BOOL {
     if(va_EsteDeclarata($3)==-1) {
         variabila_bool_declarare_init($3,$5);
-        Facemconst($3);
+        makeconst($3);
     } else {
         yyerror("error");
         printf("Redefiniti variabila\n");
@@ -129,7 +271,7 @@ variabila : STRNG ID {
 | CONST FLOATV ID ASSIGN FLOAT {
     if(va_float_EsteDeclarata($3)==-1) {
         variabila_float_declarare_init($3,$5); 
-        Facemconst($3); 
+        makeconst($3); 
     } else {
         yyerror("error");
         printf("Redefiniti variabila\n");
@@ -139,7 +281,7 @@ variabila : STRNG ID {
 | CONST CHARV ID ASSIGN CHAR {
     if(va_char_EsteDeclarata($3)==-1) {
         variabila_char_declarare_init($3,$5);  
-        Facemconst($3); 
+        makeconst($3); 
     } else {
         yyerror("error"); 
         printf("Redefiniti variabila\n");
@@ -230,87 +372,6 @@ variabila : STRNG ID {
     YYABORT;
   }
 }
-| INT FUNCTIE '(' lista_parametri ')' { 
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "int"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  } 
-}
-| INT FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "int"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  } 
-}
-| CHARV FUNCTIE '(' lista_parametri ')' {
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "char"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  }
-}
-| CHARV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "char"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  } 
-}
-| FLOATV FUNCTIE '(' lista_parametri ')' {
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "float"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  }
-}
-| FLOATV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "float"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  } 
-}
-| BOOLV FUNCTIE '(' lista_parametri ')' {
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "bool"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  }
-}
-| BOOLV FUNCTIE '(' lista_parametri ')' '[' instructiuni ']' { 
-  if(f_EsteDeclarata($2) == -1) 
-    f_Declarare_definitie($2, "bool"); 
-  else{
-    yyerror("error"); 
-    printf("Redefiniti functia\n"); 
-    YYABORT;
-  } 
-}
-| CLASS ID START_CLASA declaratii END_CLASA {
-  if(cl_EsteDeclarata($2) == -1) 
-    cl_Declarare_definitie($2); 
-  else {
-    yyerror("error");
-    printf("Redefiniti clasa\n");
-    YYABORT;
-  }
-}
 ;
 
 functie:
@@ -369,11 +430,11 @@ instructiune: ID ASSIGN right {
       printf("Variabila nu a fost declarata\n"); 
       YYABORT;
     } else {
-      if (EsteConst($1) == 1) {
+      if (isconst($1) == 1) {
         yyerror("error"); 
         printf("Variabila %s este de tip const \n", $1); 
         YYABORT; 
-      } else if (FacemNegativ($1) == 0) {
+      } else if (AsignamValoare($1) == 0) {
         yyerror("error"); 
         printf("Asignarea nu a avut loc pentru variabila %s \n", $1);
         YYABORT;

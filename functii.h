@@ -95,7 +95,7 @@ struct Vector vectori[300];
 
 void print_symbol()
 {
-    printf("Modificam fisierul symbol_table.txt\n");
+    printf("Modificam tabelul de simboluri\n");
     ffout = fopen("symbol_table.txt", "w");
 
     fprintf(ffout, "~~~Symbol Table~~~\n");
@@ -604,7 +604,7 @@ int Parametrii(char *valoare, char *tip)
     strcpy(functii[num_func].Param[functii[num_func].nr_parametri].parametri, valoare);
 }
 
-int Facemconst(char *valoare)
+int makeconst(char *valoare)
 {
    // f("da intru aici cu %s \n",valoare);
     
@@ -617,7 +617,7 @@ int Facemconst(char *valoare)
     */
 }
 
-int EsteConst(char valoare[])
+int isconst(char valoare[])
 {
     
     for(int i=1;i<=nr_consturi;i++)
@@ -638,10 +638,8 @@ void assignsum(char nume[], int b){
     variabile[i].int_valoare+=b;
 }
 
-int FacemNegativ(char valoare[])
+int AsignamValoare(char valoare[])
 {
-    
-    
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, valoare) == 0)
             {
@@ -666,7 +664,7 @@ int FacemNegativ(char valoare[])
                     TipStringGlobal=0;
                     return 1;
                     }
-                 if(strcmp(variabile[i].tip,TipAsignareId)==0 && OkAsignareId==1 ) ////////////////////////////////
+                 if(strcmp(variabile[i].tip,TipAsignareId)==0 && OkAsignareId==1 )
                     {
                         if(strcmp(variabile[i].tip,"bool")==0)
                             {
