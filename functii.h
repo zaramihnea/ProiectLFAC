@@ -4,10 +4,10 @@
 #include <stdbool.h>
 
 FILE *ffout;
-int num_var = 0;   // contor variabile
-int num_vect = 0;  // contor vectori;
-int num_func = 0;  // contor functii;
-int num_class = 0; // contor clase
+int num_var = 0;
+int num_vect = 0;
+int num_func = 0;
+int num_class = 0;
 
 
 int nr_consturi=0;
@@ -35,7 +35,7 @@ char VectorParamNoi[100][100];
 char TipParam[100][100];
 int ContorTipParamNoi=0;
 
-char TipAsignareId[100];//tipul variabilei din dreapta unei asignari de tip id<-id
+char TipAsignareId[100];
 int OkAsignareId=0;
 
 
@@ -49,7 +49,7 @@ struct Clasa
 {
     char nume[50];
     char componente[100];
-}; // structura pentru a reprezenta clasele
+};
 
 struct Function
 {
@@ -61,7 +61,7 @@ struct Function
         char parametri[100];
         char tipParametri[100];
     } Param[100];
-}; // structura pentru a reprezenta functiile
+};
 
 struct Variabila
 {
@@ -73,7 +73,7 @@ struct Variabila
     int valoare_bool;
     char string_valoare[100];
     int init;
-}; // structura pentru reprezentarea unei variabile
+};
 
 struct Vector
 {
@@ -100,7 +100,6 @@ void print_symbol()
 
     fprintf(ffout, "~~~Symbol Table~~~\n");
 
-    // afisam  toate variabilele din fisier si tipul acestora
     for (int i = 0; i < num_var; i++)
     {
 
@@ -120,17 +119,15 @@ void print_symbol()
         else if (strcmp(variabile[i].tip, "string") == 0)
             fprintf(ffout, "=%s\n", variabile[i].string_valoare);
     }
-    // afisam toate clasele din fisier
     for (int i = 0; i < num_class; i++)
         fprintf(ffout, "Clasa %s \n", clase[i].nume);
-    // afisam toti vectorii din fisier si tipul acestora
     for (int i = 0; i < num_vect; i++)
         fprintf(ffout, "Vectorul %s este de tipul %s cu size-ul %d\n", vectori[i].nume, vectori[i].tip, vectori[i].dimensiune);
-    // afisam toate functiile din fisier
-    for (int i = 1; i <= num_func; i++) // pt functia cu numarul i avem numele ei, tipul ei si nr de parametrii pe care il are
+
+    for (int i = 1; i <= num_func; i++)
     {
         fprintf(ffout, "Functia cu numele %s de tip %s are %d parametri(u) \n", functii[i].nume, functii[i].tip, functii[i - 1].nr_parametri);
-        for (int j = 1; j <= functii[i].nr_parametri + 1; j++) // pt primu parametru din functia i afisez tipul parametrului si parametrul in sine
+        for (int j = 1; j <= functii[i].nr_parametri + 1; j++)
             if (strlen(functii[i - 1].Param[j].tipParametri) != 0)
             {
                 fprintf(ffout, "Parametrul %s este de tipul %s\n",functii[i - 1].Param[j].parametri, functii[i - 1].Param[j].tipParametri);
@@ -150,8 +147,7 @@ void print_table()
     
 }
 
-// functie de declarare clasa
-void cl_Declarare_definitie(char nume[]) // cl_decl_def
+void cl_Declarare_definitie(char nume[])
 {
     strcpy(clase[num_class].nume, nume);
     num_class++;
@@ -208,9 +204,7 @@ void print_to_console_char(char a){
     printf("%c\n",a);
 }
 
-
-// functie care verifica daca o clasa a fost declarata
-int cl_EsteDeclarata(char nume[]) // cl_isdeclared
+int cl_EsteDeclarata(char nume[])
 {
     for (int i = 0; i < num_class; i++)
         if (strcmp(clase[i].nume, nume) == 0)
@@ -218,8 +212,7 @@ int cl_EsteDeclarata(char nume[]) // cl_isdeclared
     return -1;
 }
 
-// functie care se ocupa cu declararea unei functii
-void f_Declarare_definitie(char nume[], char tip[]) // f_decl_def
+void f_Declarare_definitie(char nume[], char tip[])
 {
     num_func++;
     strcpy(functii[num_func].tip, tip);
@@ -227,8 +220,7 @@ void f_Declarare_definitie(char nume[], char tip[]) // f_decl_def
     functii[num_func].nr_parametri = 0;
 }
 
-// functie care imi verifica daca functia este declarata
-int f_EsteDeclarata(char nume[]) // f_isdeclared
+int f_EsteDeclarata(char nume[])
 {
     for (int i = 0; i <= num_func; i++)
         if (strcmp(functii[i].nume, nume) == 0) 
@@ -236,8 +228,7 @@ int f_EsteDeclarata(char nume[]) // f_isdeclared
     return -1;
 }
 
-// functie care se ocupa de declararea si definirea unui vector
-void v_Declarare_definitie(char nume[], char tip, int dimensiune) // v_decl
+void v_Declarare_definitie(char nume[], char tip, int dimensiune)
 {
     vectori[num_vect].dimensiune = dimensiune;
     strcpy(vectori[num_vect].nume, nume);
@@ -273,8 +264,7 @@ void v_Declarare_definitie(char nume[], char tip, int dimensiune) // v_decl
     num_vect++;
 }
 
-// functie care verifica daca un vector este declarat
-int v_EsteDeclarata(char nume[]) // v_isdeclared
+int v_EsteDeclarata(char nume[])
 {
     for (int i = 0; i < num_vect; i++)
         if (strcmp(vectori[i].nume, nume) == 0)
@@ -294,8 +284,7 @@ int vs_decl(char nume[], int dimensiune, char val[])
     return 0;
 }
 
-// functie care realizeaza atribuirea unui element intr-un vector de int
-int vector_int_atribuire(char nume[], char tip, int pozitie, int valoare) // i_v_atrib
+int vector_int_atribuire(char nume[], char tip, int pozitie, int valoare)
 {
     int vector = v_EsteDeclarata(nume);
     if (vector == -1)
@@ -303,8 +292,7 @@ int vector_int_atribuire(char nume[], char tip, int pozitie, int valoare) // i_v
     vectori[vector].vector_int[pozitie] = valoare;
 }
 
-// functie care realizeaza atribuirea unui element intr-un vector de float
-int vector_float_atribuire(char nume[], char tip, int pozitie, float valoare) // f_v_atrib
+int vector_float_atribuire(char nume[], char tip, int pozitie, float valoare)
 {
     int vector = v_EsteDeclarata(nume);
     if (vector == -1)
@@ -312,8 +300,7 @@ int vector_float_atribuire(char nume[], char tip, int pozitie, float valoare) //
     vectori[vector].vector_float[pozitie] = valoare;
 }
 
-// functie care realizeaza atribuirea unui element intr-un vector de char-uri
-int vector_char_atribuire(char nume[], char tip, int pozitie, char valoare) // c_v_atrib
+int vector_char_atribuire(char nume[], char tip, int pozitie, char valoare)
 {
     int vector = v_EsteDeclarata(nume);
     if (vector == -1)
@@ -321,8 +308,7 @@ int vector_char_atribuire(char nume[], char tip, int pozitie, char valoare) // c
     vectori[vector].vector_char[pozitie] = valoare;
 }
 
-// functie care realizeaza atribuirea unui element intr-un vector "bool-uri"
-int vector_bool_atribuire(char nume[], char tip, int pozitie, int valoare) // b_v_atrib
+int vector_bool_atribuire(char nume[], char tip, int pozitie, int valoare)
 {
     int vector = v_EsteDeclarata(nume);
     if (vector == -1)
@@ -330,8 +316,7 @@ int vector_bool_atribuire(char nume[], char tip, int pozitie, int valoare) // b_
     vectori[vector].vector_bool[pozitie] = valoare;
 }
 
-// functie care realizeaza declararea si initializarea unei variabile
-void variabila_int_declare_init(char nume[], int valoare) // int_decl
+void variabila_int_declare_init(char nume[], int valoare)
 {
     strcpy(variabile[num_var].tip, "int");
     strcpy(variabile[num_var].nume, nume);
@@ -340,8 +325,7 @@ void variabila_int_declare_init(char nume[], int valoare) // int_decl
     num_var++;
 }
 
-// functia care realizeaza doar declararea unei variabile de tip int
-void variabila_int_declare_only(char nume[]) // int_decl_noint
+void variabila_int_declare_only(char nume[])
 {
     strcpy(variabile[num_var].nume, nume);
     strcpy(variabile[num_var].tip, "int");
@@ -349,22 +333,22 @@ void variabila_int_declare_only(char nume[]) // int_decl_noint
     num_var++;
 }
 
-// functie care verifica daca o variabila este deja declarata
-int va_EsteDeclarata(char nume[]) // is_declared
+
+int va_EsteDeclarata(char nume[])
 {
     for (int i = 0; i < num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
             return i;
     return -1;
 }
-// functie care ma ajuta la returnarea tipului unei variabile
+
 char *type(char nume[])
 {
     for (int i = 0; i < num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
             return variabile[i].tip;
 }
-// functie care ma ajuta la returnarea valorii unei functii
+
 int valoare(char nume[])
 {
     for (int i = 0; i < num_var; i++)
@@ -372,8 +356,7 @@ int valoare(char nume[])
             return variabile[i].int_valoare;
 }
 
-// functie care verifica daca o variabila a fost initializata
-int va_EsteInitializata(char nume[]) // is_init
+int va_EsteInitializata(char nume[])
 {
     for (int i = 0; i < num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
@@ -381,8 +364,8 @@ int va_EsteInitializata(char nume[]) // is_init
                 return 0;
     return 1;
 }
-// functie care ma ajuta la initializarea unei variabile
-void va_atribuire(char nume[], int valoare) // int_atrib
+
+void va_atribuire(char nume[], int valoare)
 {
     int declarat = va_EsteDeclarata(nume);
     variabile[declarat].int_valoare = valoare;
@@ -390,8 +373,8 @@ void va_atribuire(char nume[], int valoare) // int_atrib
 }
 
 // CHAR
-// functie care ma ajuta la declararea si initializarea unei variabile de tip char
-void variabila_char_declarare_init(char nume[], char valoare) // char_decl
+
+void variabila_char_declarare_init(char nume[], char valoare)
 {
     
     strcpy(variabile[num_var].tip, "char");
@@ -401,16 +384,15 @@ void variabila_char_declarare_init(char nume[], char valoare) // char_decl
     num_var++;
 }
 
-// functie care ma ajuta doar la declararea unei variabile de tip char
-void variabila_char_declarare_only(char nume[]) // char_decl_noinit
+void variabila_char_declarare_only(char nume[])
 {
     strcpy(variabile[num_var].tip, "char");
     strcpy(variabile[num_var].nume, nume);
     variabile[num_var].init = 0;
     num_var++;
 }
-// functie care ma ajuta la verificarea daca o variabila de tip char este declarata
-int va_char_EsteDeclarata(char nume[]) // char_is_declared
+
+int va_char_EsteDeclarata(char nume[])
 {
   
     for (int i = 0; i <= num_var; i++)
@@ -418,8 +400,8 @@ int va_char_EsteDeclarata(char nume[]) // char_is_declared
             return i;
     return -1;
 }
-// functie care ma ajuta sa verific daca o variabila este initializata
-int va_char_EsteInitializata(char nume[]) // char_is_init
+
+int va_char_EsteInitializata(char nume[])
 {
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
@@ -429,8 +411,8 @@ int va_char_EsteInitializata(char nume[]) // char_is_init
                 return 1;
     return 0;
 }
-// functie care ma ajuta la atribuirea unei valori de tip char
-void va_char_atribuire(char nume[], int valoare) // char_atrib
+
+void va_char_atribuire(char nume[], int valoare)
 {
     int declarat = va_char_EsteDeclarata(nume);
     variabile[declarat].char_valoare = valoare;
@@ -439,8 +421,7 @@ void va_char_atribuire(char nume[], int valoare) // char_atrib
 
 // FLOAT
 
-// functie care ma ajuta la declararea si initializarea unei variabile de tip char
-void variabila_float_declarare_init(char nume[], int valoare) // float_decl
+void variabila_float_declarare_init(char nume[], int valoare)
 {
     strcpy(variabile[num_var].tip, "float");
     strcpy(variabile[num_var].nume, nume);
@@ -449,8 +430,7 @@ void variabila_float_declarare_init(char nume[], int valoare) // float_decl
     num_var++;
 }
 
-// functie care ma ajuta doar la declararea unei variabile de tip float
-void variabila_float_declarare_only(char nume[]) // float_decl_noint
+void variabila_float_declarare_only(char nume[])
 {
     strcpy(variabile[num_var].tip, "float");
     strcpy(variabile[num_var].nume, nume);
@@ -458,8 +438,7 @@ void variabila_float_declarare_only(char nume[]) // float_decl_noint
     num_var++;
 }
 
-// functie care ma ajuta la verificarea daca o variabila float este declarata
-int va_float_EsteDeclarata(char nume[]) // float_is_declared
+int va_float_EsteDeclarata(char nume[])
 {
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
@@ -467,8 +446,7 @@ int va_float_EsteDeclarata(char nume[]) // float_is_declared
     return -1;
 }
 
-// functie care ma ajuta sa verific daca o variabila de tip float este initializata
-int va_float_EsteInitializata(char nume[]) // float_is_init
+int va_float_EsteInitializata(char nume[])
 {
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
@@ -479,8 +457,8 @@ int va_float_EsteInitializata(char nume[]) // float_is_init
     return 0;
 }
 
-// functie care ma ajuta cu atribuirea unei valori intr-o variabila de tip float
-void va_float_atribuire(char nume[], int valoare) // float_atrib
+
+void va_float_atribuire(char nume[], int valoare)
 {
     int declarat = va_float_EsteDeclarata(nume);
     variabile[declarat].float_valoare = valoare;
@@ -488,8 +466,7 @@ void va_float_atribuire(char nume[], int valoare) // float_atrib
 }
 
 // BOOL
-// functie care ma ajuta la declararea si initializarea unei variabile de tip bool
-void variabila_bool_declarare_init(char nume[], char valoare_bool[]) // bool_decl
+void variabila_bool_declarare_init(char nume[], char valoare_bool[])
 {
     strcpy(variabile[num_var].nume, nume);
     strcpy(variabile[num_var].tip, "bool");
@@ -505,8 +482,7 @@ void variabila_bool_declarare_init(char nume[], char valoare_bool[]) // bool_dec
     num_var++;
 }
 
-// functie care ma ajuta la declararea unei variabile de tip bool
-void variabila_bool_declare_only(char nume[]) // bool_decl_noinit
+void variabila_bool_declare_only(char nume[])
 {
     strcpy(variabile[num_var].tip, "bool");
     strcpy(variabile[num_var].nume, nume);
@@ -514,8 +490,7 @@ void variabila_bool_declare_only(char nume[]) // bool_decl_noinit
     num_var++;
 }
 
-// functie care ma ajuta sa verific daca o variabila de tip bool este declarata
-int va_bool_EsteDeclarata(char nume[]) // bool_is_declared
+int va_bool_EsteDeclarata(char nume[])
 {
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
@@ -544,7 +519,6 @@ void va_bool_atribuire(char nume[], int valoare)
 
 // STRING
 
-// functie care ma ajuta la declararea si initializarea unei variabile de tip string
 void variabila_string_declarare_init(char nume[], char valoare[])
 {
     strcpy(variabile[num_var].nume, nume);
@@ -553,29 +527,24 @@ void variabila_string_declarare_init(char nume[], char valoare[])
     variabile[num_var].init = 1;
     num_var++;
 }
-// functiecare ma ajuta la declararea unei variabile de tip string
+
 void variabila_string_declarare_only(char nume[])
 {
-   // printf("intru aici\n" );
     strcpy(variabile[num_var].nume, nume);
     strcpy(variabile[num_var].tip, "string");
     variabile[num_var].init = 0;
-    //printf(" %s  \n",variabile[num_var].nume );
     num_var++;
    
 }
 
-// functie care verifica daca o variabila de tip string este declarata
 int va_string_EsteDeclarata(char nume[])
 {
-   // printf("intru aicif(va_float_EsteDeclarata($\n" );
     for (int i = 0; i <= num_var; i++)
         if (strcmp(variabile[i].nume, nume) == 0)
             return i;
     return -1;
 }
 
-// functie care ma ajuta sa verific daca o variabila este initializata
 int va_string_EsteInitializata(char nume[])
 {
     for (int i = 0; i <= num_var; i++)
@@ -587,7 +556,6 @@ int va_string_EsteInitializata(char nume[])
     return 0;
 }
 
-// functie care ma ajuta la atribuirea unei valori pentru o variabila de tip string
 void va_string_atribuire(char nume[], char valoare[])
 {
     int declarat = va_string_EsteDeclarata(nume);
@@ -595,7 +563,6 @@ void va_string_atribuire(char nume[], char valoare[])
     variabile[declarat].init = 1;
 }
 
-// funcite pentru parametrii
 int Parametrii(char *valoare, char *tip)
 {
 
@@ -605,16 +572,9 @@ int Parametrii(char *valoare, char *tip)
 }
 
 int makeconst(char *valoare)
-{
-   // f("da intru aici cu %s \n",valoare);
-    
+{   
     nr_consturi++;
     strcpy(consturi[nr_consturi],valoare);
-  /*
-   for(int i=1;i<=nr_consturi;i++)
-        printf("%s ",consturi[i]);
-    printf("\n");
-    */
 }
 
 int isconst(char valoare[])
@@ -639,7 +599,6 @@ void assignsum(char nume[], int b){
 }
 
 void assignid(char nume1[], char nume2[], char nume3[]){
-    //add the sum of nume2 and nume3 to nume1
     int i;
     for(i=0;i<=num_var;i++)
         if(strcmp(nume1, variabile[i].nume)==0)
@@ -789,7 +748,7 @@ int AsignareDeVector(char nume[])
 }
 
 
-int VerificareParametru(char NumeParametru[])//am facut functia ca sa vedem daca functiile corespund intre ele
+int VerificareParametru(char NumeParametru[])
 {
     
     ContorParamNoi++;
@@ -825,22 +784,22 @@ int VerificaParametruFIF(char NumeFunctie[])
                 break;}
            }
        
-    if(ContorParamNoi==functii[j-1].nr_parametri)// in cazul in care avem accelasi nr de parametrii gen
+    if(ContorParamNoi==functii[j-1].nr_parametri)
        {
-        for(int i=1;i<=functii[j-1].nr_parametri;i++)// tre sa compar tipul de parametrii
+        for(int i=1;i<=functii[j-1].nr_parametri;i++)
            {
              if(strcmp(TipParam[i],functii[j-1].Param[i].tipParametri)==0)
                 { 
                  if(i==functii[j-1].nr_parametri)
-                        return 0;//in cazul in care toti parametrii sunt valabili
+                        return 0;
                 }
-                   else// in cazul in care tipul parametrilor nu corespud
+                   else
                         return 1;
     
            }
        }
        else 
-            return 2;//cazul in care numarul de parametrii nu corespund
+            return 2;
 }
 
 int VerificareFunctie(char NumeFunctie[])
@@ -855,22 +814,22 @@ int VerificareFunctie(char NumeFunctie[])
                 break;}
            }
        
-    if(ContorParamNoi==functii[j-1].nr_parametri)// in cazul in care avem accelasi nr de parametrii gen
+    if(ContorParamNoi==functii[j-1].nr_parametri)
        {
-        for(int i=1;i<=functii[j-1].nr_parametri;i++)// tre sa compar tipul de parametrii
+        for(int i=1;i<=functii[j-1].nr_parametri;i++)
            {
              if(strcmp(TipParam[i],functii[j-1].Param[i].tipParametri)==0)
                 { 
                  if(i==functii[j-1].nr_parametri)
-                        return 0;//in cazul in care toti parametrii sunt valabili
+                        return 0;
                 }
-                   else// in cazul in care tipul parametrilor nu corespud
+                   else
                         return 1;
     
            }
        }
        else 
-            return 2;//cazul in care numarul de parametrii nu corespund
+            return 2;
 }
 
 int operation(int a, int b, char op)
