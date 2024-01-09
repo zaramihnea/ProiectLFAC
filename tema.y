@@ -313,7 +313,6 @@ variabila : STRNG ID {
 }
 ;
 
-
 functie:
   INT FUNCTIE '(' lista_parametri ')' {
     if(f_EsteDeclarata($2) == -1) 
@@ -364,8 +363,7 @@ instructiuni : instructiune ';'
              | instructiuni operatie 
              ;
 
-instructiune:
-  ID ASSIGN right {
+instructiune: ID ASSIGN right {
     if (va_EsteDeclarata($1) == -1) {
       yyerror(); 
       printf("Variabila nu a fost declarata\n"); 
@@ -385,6 +383,18 @@ instructiune:
   | EVAL NR {
     Eval($2);
   }
+  | EVAL ID {
+    if (strcmp((type($2)), "int") == 0) 
+      Eval(valoare($2)); 
+    else {
+      yyerror();
+      printf("Variabila nu este de tipul dorit\n");
+      YYABORT;
+    }
+  }
+  | EVAL NR '+' NR {
+    Eval($2 + $4);
+  } 
   | EVAL ID '+' NR {
     if (strcmp((type($2)), "int") == 0) 
       Eval(valoare($2) + $4); 
@@ -396,6 +406,24 @@ instructiune:
   }
   | PRINT {
     print_symbol();
+  }
+  | PRINT ID {
+    if(va_EsteDeclarata($2) == -1) {
+      yyerror();
+      printf("Variabila nu a fost declarata\n");
+      YYABORT;
+    } else {
+      if (strcmp((type($2)), "int") == 0) 
+        print_to_console_int(valoare_int($2));
+      else if (strcmp((type($2)), "float") == 0) 
+        print_to_console_float(valoare_float($2));
+      else if (strcmp((type($2)), "char") == 0) 
+        print_to_console_char(caracter($2));
+      else if (strcmp((type($2)), "bool") == 0) 
+        print_to_console_bool(valoare_bool($2));
+      else if (strcmp((type($2)), "string") == 0) 
+        print_to_console_string(valoare_string($2));
+    }
   }
   | FUNCTIE '(' apeluri ')' {
     if (f_EsteDeclarata($1) == -1) {
@@ -424,7 +452,7 @@ instructiune:
 
 
 expresii : expresii OPERATOR expresie 
-         | expresie  {}
+         | expresie
         ;
 
 expresie:
@@ -452,10 +480,6 @@ expresie:
   | FUNCTIE '(' apeluri ')'
   ;
 
-
-
-
-
 right:
   right OPERATOR right
   | right LOGICAL_OPERATOR right
@@ -468,6 +492,15 @@ right:
       YYABORT;
     } else {
       IdprimesteId($1);
+    }
+  }
+  | ID '+' NR {
+    if (va_EsteDeclarata($1) == -1) {
+      yyerror();
+      printf("Variabila nu a fost declarata\n");
+      YYABORT;
+    } else {
+      assignsum($1, $3);
     }
   }
   | CHAR

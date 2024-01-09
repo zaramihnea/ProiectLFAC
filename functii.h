@@ -132,6 +132,8 @@ void print_symbol()
     fclose(ffout);
 }
 
+
+
 void print_table()
 {
     printf("Modificam fisierul symbol_table_functions.txt\n");
@@ -154,6 +156,65 @@ void cl_Declarare_definitie(char nume[]) // cl_decl_def
     strcpy(clase[num_class].nume, nume);
     num_class++;
 }
+
+int valoare_int(char nume[])
+{
+    for (int i = 0; i < num_var; i++)
+        if (strcmp(variabile[i].nume, nume) == 0)
+            return variabile[i].int_valoare;
+}
+
+int valoare_float(char nume[])
+{
+    for (int i = 0; i < num_var; i++)
+        if (strcmp(variabile[i].nume, nume) == 0)
+            return variabile[i].float_valoare;
+}
+
+int caracter(char nume[])
+{
+    for (int i = 0; i < num_var; i++)
+        if (strcmp(variabile[i].nume, nume) == 0)
+            return variabile[i].char_valoare;
+}
+
+int valoare_bool(char nume[])
+{
+    for (int i = 0; i < num_var; i++)
+        if (strcmp(variabile[i].nume, nume) == 0)
+            return variabile[i].valoare_bool;
+}
+
+int valoare_string(char nume[])
+{
+    for (int i = 0; i < num_var; i++)
+        if (strcmp(variabile[i].nume, nume) == 0)
+            return variabile[i].string_valoare;
+}
+
+void print_to_console_int(int a){
+    printf("%d\n",a);
+}
+
+void print_to_console_float(float a){
+    printf("%f\n",a);
+}
+
+void print_to_console_string(char a[]){
+    printf("%s\n",a);
+}
+
+void print_to_console_bool(int a){
+    if(a==1)
+        printf("true\n");
+    else
+        printf("false\n");
+}
+
+void print_to_console_char(char a){
+    printf("%c\n",a);
+}
+
 
 // functie care verifica daca o clasa a fost declarata
 int cl_EsteDeclarata(char nume[]) // cl_isdeclared
@@ -597,6 +658,15 @@ int EsteConst(char valoare[])
          
 }
 
+void assignsum(char nume[], int b){
+    //add b to the value of nume in variable vector
+    int i;
+    for(i=0;i<=num_var;i++)
+        if(strcmp(nume,variabile[i].nume)==0)
+            break;
+    variabile[i].int_valoare+=b;
+}
+
 int FacemNegativ(char valoare[])
 {
     
@@ -816,6 +886,23 @@ int VerificareFunctie(char NumeFunctie[])
        }
        else 
             return 2;//cazul in care numarul de parametrii nu corespund
+}
+
+int operation(int a, int b, char op)
+{
+    switch (op)
+    {
+    case '+':
+        return a + b;
+    case '-':
+        return a - b;
+    case '*':
+        return a * b;
+
+    case '/':
+        return a / b;
+    }
+    return 0;
 }
 
 int IdprimesteId(char AlDoilea[])

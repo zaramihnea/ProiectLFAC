@@ -1,10 +1,11 @@
-variabila : _xclass de tip int care are valoarea= 0
-variabila : _yclass de tip float care are valoarea= 0.000000
-variabila : _x de tip int care are valoarea= 0
+variabila : _xclass de tip int care are valoarea= 3
+variabila : _yclass de tip bool care are valoarea=1
+variabila : _x de tip int care are valoarea= 3
 variabila : _y de tip float care are valoarea= 0.000000
-variabila : _a de tip int care are valoarea= 5
+variabila : _a de tip int care are valoarea= 6
 variabila : _f de tip float care are valoarea= 0.000000
-variabila : _sum de tip int care are valoarea= 5
+variabila : _sum de tip int care are valoarea= 6
 variabila : _abc de tip int care are valoarea= 0
 variabila : _counter de tip int care are valoarea= 0
+variabila : _max de tip int care are valoarea= 3
 Clasa _A 

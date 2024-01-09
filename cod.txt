@@ -1,27 +1,38 @@
 class _A {
-    int _xclass;
-    float _yclass;
+    int _xclass <- 3;
+    bool _yclass <- true;
 };
 
-
-int _x;
+int _x <- 3;
 float _y;
-int _a <- 5;
+int _a <- 6;
 float _f;
-int _sum <- 4;
+int _sum <- 0;
 int _abc;
 int _counter <- 0;
+int _max <- 1;
 
-int maxi(int _x);
-
+int maxi(int _x)[
+    if _max < _x then
+        _max <- _x;
+    else
+        _x <- _max;
+    endif
+];
 
 
 begin_progr
 _sum <- _a;
-
+print _sum;
+print _max;
+maxi(_sum);
+print _max;
+Eval 2;
+Eval _max;
+TypeOf(2.3);
 TypeOf(_sum);
 TypeOf(_y);
+print _sum;
+print _x;
+print _yclass;
 end_progr
-
-
-for _counter = 0, _counter < 20 , _counter + + do _sum <- _sum + 1; over
