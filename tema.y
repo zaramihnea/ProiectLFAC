@@ -1,12 +1,13 @@
 %{
-#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include "IdList.h"
 extern FILE* yyin;
 extern char* yytext;
 extern int yylineno;
-#include "functii.h"
 int yylex();
-int yyerror(char * s);
-
+int yyerror(const char * s);
+class IdList ids;
 %}
 %token STRNG INT CHARV BOOLV FLOATV PRINT EVAL CLASS CONST ASSIGN OPERATOR LOGICAL_OPERATOR BGIN IF ELSE THEN ENDIF FOR WHILE OVER DO START_CLASA END_CLASA END ID NR FLOAT BOOL CHAR STRING FUNCTIE VECTOR UTYPE GVAR GFUNC START_FUNC END_FUNC TYPEOF
 %union 
@@ -738,13 +739,14 @@ continuare_if : ELSE instructiuni continuare_if
               ;
 %%
 
-int yyerror(char * s){
-printf("err: %s la linia:%d\n",s,yylineno);
+int yyerror(const char * s){
+printf("error: %s la linia:%d\n",s,yylineno);
 }
 
 int main(int argc, char** argv){
 int ok=0;
 yyin=fopen(argv[1],"r");
 yyparse();
-print_symbol();
+cout << "Variables:" <<endl;
+ids.printVars();
 }
