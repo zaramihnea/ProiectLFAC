@@ -21,25 +21,22 @@
 "begin_progr" {return BGIN;}
 "if" {return IF;}
 "else" {return ELSE;}
-"then" {return THEN;}
-"endif" {return ENDIF;}
 "for" {return FOR;}
 "while" {return WHILE;}
-"over" {return OVER;}
 "do" {return DO;}
 "[" {return START_CLASA;}
 "]" {return END_CLASA;}
 "{" {return START_FUNC;}
 "}" {return END_FUNC;}
 "end_progr" {return END;}
-$[a-zA-Z][a-zA-Z0-9]* {yylval.nume=strdup(yytext); return ID;}
+$[_a-zA-Z][_a-zA-Z0-9]* {yylval.nume=strdup(yytext); return ID;}
 [0-9]+ {yylval.valoare=atoi(yytext); return NR; }
 [0-9]+"."[0-9]* {yylval.valoare_float = atof(yytext); return FLOAT;}
 "true"|"false" {yylval.valoare_bool=strdup(yytext); return BOOL;}
 \'[a-zA-Z]\' {yylval.caracter=yytext[1]; return CHAR;}
 ["].*["] {yylval.string=strdup(yytext); return STRING;}
-[a-zA-Z][a-zA-Z0-9]* {yylval.nume=strdup(yytext); return FUNCTIE;}
-@[a-zA-Z][a-zA-Z0-9]* {yylval.nume=strdup(yytext); return VECTOR;}
+%[_a-zA-Z][_a-zA-Z0-9]* {yylval.nume=strdup(yytext); return FUNCTIE;}
+@[_a-zA-Z][_a-zA-Z0-9]* {yylval.nume=strdup(yytext); return VECTOR;}
 [ \t] ;
 \n {yylineno++;}
 . {return yytext[0];}
