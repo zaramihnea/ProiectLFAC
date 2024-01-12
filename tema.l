@@ -4,6 +4,11 @@
 %}
 %option noyywrap
 %%
+
+"- user types -" {return UTYPE;}
+"- global variables -" {return GVAR;}
+"- global functions -" {return GFUNC;}
+
 "int"|"float"|"char"|"string" {yylval.string = strdup(yytext);return TYPE;}
 "print" {return PRINT;}
 "Eval" {return EVAL;}
@@ -43,3 +48,5 @@ $[a-zA-Z][a-zA-Z0-9]* {yylval.nume=strdup(yytext); return ID;}
 [ \t] ;
 \n {yylineno++;}
 . {return yytext[0];}
+
+%%

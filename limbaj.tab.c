@@ -131,7 +131,7 @@ extern FILE* yyin;
 extern char* yytext;
 extern int yylineno;
 int yylex();
-int yyerror(const char * s);
+int yyerror(string  s);
 class IdList ids;
 
 
@@ -500,7 +500,7 @@ static const yytype_uint8 yyrline[] =
 #if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
-static const char *const yytname[] =
+static string const yytname[] =
 {
   "$end", "error", "$undefined", "BGIN", "END", "ASSIGN", "NR", "FLOAT",
   "CHAR", "BOOL", "STRING", "PRINT", "IF", "ELSE", "FOR", "WHILE", "EVAL",
@@ -957,11 +957,11 @@ int yydebug;
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static YYSIZE_T
-yystrlen (const char *yystr)
+yystrlen (string yystr)
 #else
 static YYSIZE_T
 yystrlen (yystr)
-    const char *yystr;
+    string yystr;
 #endif
 {
   YYSIZE_T yylen;
@@ -981,16 +981,16 @@ yystrlen (yystr)
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static char *
-yystpcpy (char *yydest, const char *yysrc)
+yystpcpy (char *yydest, string yysrc)
 #else
 static char *
 yystpcpy (yydest, yysrc)
     char *yydest;
-    const char *yysrc;
+    string yysrc;
 #endif
 {
   char *yyd = yydest;
-  const char *yys = yysrc;
+  string yys = yysrc;
 
   while ((*yyd++ = *yys++) != '\0')
     continue;
@@ -1009,7 +1009,7 @@ yystpcpy (yydest, yysrc)
    null, do not copy; instead, return the length of what the result
    would have been.  */
 static YYSIZE_T
-yytnamerr (char *yyres, const char *yystr)
+yytnamerr (char *yyres, string yystr)
 {
   if (*yystr == '"')
     {
@@ -1166,11 +1166,11 @@ yysyntax_error (char *yyresult, int yystate, int yychar)
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
+yydestruct (string yymsg, int yytype, YYSTYPE *yyvaluep)
 #else
 static void
 yydestruct (yymsg, yytype, yyvaluep)
-    const char *yymsg;
+    string yymsg;
     int yytype;
     YYSTYPE *yyvaluep;
 #endif
@@ -1828,7 +1828,7 @@ yyreturn:
 
 #line 171 "limbaj.y"
 
-void yyerror(const char * s){
+void yyerror(string  s){
 printf("error: %s at line:%d\n",s,yylineno);
 }
 
