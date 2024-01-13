@@ -13,9 +13,10 @@ public:
     string type;
     variant<int, double, bool, char, string> val; // we put double instead of float because that is what atof() returns
 
-    Value();
+    Value() {};
 
-    Value(string type){
+    Value(string type)
+    {
         this->type = type;
     }
 
@@ -120,12 +121,14 @@ public:
 
 class IdList
 {
+public:
     vector<Variable> vars;
     vector<Function> funcs;
     vector<UserDefinedType> userdefs;
     vector<Vector> vectors;
+
     vector<Parameter> tempParams;
-public:
+    Value tempVal;
     bool existsVar(const char *name);
     bool existsFunc(const char *name);
     bool existsUserdef(const char *name);
@@ -140,3 +143,27 @@ public:
     void printSymbolTable();
     ~IdList();
 };
+
+// class AST
+// {
+//     vector<Node> expression; // the expression currently being evaluated
+//     string type;             // data type of the expression
+//     Value finalValue;
+// public:
+    
+// };
+
+// class Node
+// {
+//     Node lChild, rChild;
+//     char symbol;
+//     Value val;
+
+//     Node(Vector vector) {
+
+//     }
+// };
+
+// ceva functie recurenta kind of care se apeleaza cu alte date
+// daca e doar o valoare, se baga in nod,
+// daca

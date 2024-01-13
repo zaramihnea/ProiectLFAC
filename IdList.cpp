@@ -2,8 +2,9 @@
 
 using namespace std;
 
-class IdList ids;
-static string currentScope = "global";
+IdList ids;
+//class AST exprAST;
+string currentScope;
 
 void Eval(string id){
 

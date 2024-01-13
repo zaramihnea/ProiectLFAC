@@ -1,21 +1,4 @@
-~~~Symbol Table~~~
-var : $xclass tip int are valoarea= 3
-var : $yclass tip bool are valoarea=1
-var : $x tip int are valoarea= 3
-var : $y tip float are valoarea= 0.000000
-var : $my_const tip int are valoarea= 19
-var : $a tip int are valoarea= 6
-var : $f tip float are valoarea= 0.000000
-var : $sum tip int are valoarea= 6
-var : $abc tip int are valoarea= 0
-var : $counter tip int are valoarea= 0
-var : $max tip int are valoarea= 3
-var : $c tip char are valoarea= a
-var : $fvar1 tip float are valoarea= 2.000000
-var : $fvar2 tip float are valoarea= 3.000000
-var : $intvar1 tip int are valoarea= 2
-var : $mainvar tip int are valoarea= 0
-Clasa $A 
-Vectorul @vector este de tipul int cu size-ul 5
-Functia cu numele maxi de tip int are 2 parametri(u) 
-Parametrul $x este de tipul int
+Symbol Table:
+Variables and Constants:
+
+Functions:
