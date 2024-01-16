@@ -6,7 +6,10 @@ extern FILE* yyin;
 extern char* yytext;
 extern int yylineno;
 int yylex();
-int yyerror(const char * s);
+void yyerror(const char * s);
+extern IdList ids;
+extern string currentScope;
+extern string typeOfId;
 %}
 %union 
 {
@@ -17,20 +20,19 @@ char value_char;
 bool value_bool;
 }
 
-%token BGIN END ASSIGN NR FLOAT CHAR BOOL STRING PRINT IF ELSE FOR WHILE EVAL START_CLASA END_CLASA START_FUNC END_FUNC LOGICAL_OPERATOR
+%token BGIN END ASSIGN NR FLOAT CHAR BOOL STRING PRINT IF ELSE FOR WHILE EVAL TYPEOF CONST START_CLASA DO END_CLASA START_FUNC END_FUNC LOGICAL_OPERATOR GVAR GFUNC UTYPE
 %token<string> ID TYPE FUNCTIE VECTOR CLASS 
 
-%type <string> assignment print_statement expression condition functie_call class_statement eval_statement STRING list_param param LOGICAL_OPERATOR
-%type <value_int> NR
+%type <string> assignment print_statement condition functie_call class_statement eval_statement STRING list_param param LOGICAL_OPERATOR
+%type <value_int> NR expression
 %type <value_float> FLOAT
 %type <value_char> CHAR
 %type <value_bool> BOOL
 
-
-%start progr
+%start progr 
 %%
 
-progr: UTYPE utype gvars GFUNC gfunc block {
+progr: {currentScope = "global";} utype {currentScope = "global";} gvars gfunc {currentScope = "main";} block {
     printf("Program corect sintactic\n");
 }
 
@@ -38,8 +40,7 @@ utype : class ';'
         | utype class ';'
         ;
 
-class : CLASS ID START_CLASA list END_CLASA { if(!ids.existsUserdef($2)) {
-                        currentScope = $2;
+class : CLASS ID {currentScope = $2;} START_CLASA class_list END_CLASA { if(!ids.existsUserdef($2)) {                        
                         UserDefinedType newUserDef($2);
                           ids.addUserDef(newUserDef);
                      }
@@ -56,9 +57,18 @@ class : CLASS ID START_CLASA list END_CLASA { if(!ids.existsUserdef($2)) {
                     }
         ;
 
+class_list : class_block ';'
+            | class_list class_block ';'
+            ;
+
+class_block : declaration 
+               | class_block declaration
+               ;
+
+
 gvars : declaration ';'
         |  gvars declaration ';'
-        | GVARS gvars {currentScope = "global"}
+        | GVAR {currentScope = "global";} gvars 
         ;
 
 declaration : TYPE ID { if(!ids.existsVar($2)) {
@@ -70,8 +80,20 @@ declaration : TYPE ID { if(!ids.existsVar($2)) {
                           std::cerr << "Error: variable with name '" << $2 << "' already exists." << std::endl;
                      }
                     }
-                | TYPE VECTOR ID '[' NR ']' { if(!ids.existsVect($3)) {
-                        Vector newVector($3,$1,$5);
+
+               | CONST TYPE ID {
+                    if(!ids.existsVar($3)) {
+                        Value varVal($2);
+                        Variable newVar($3,varVal);
+                         newVar.isConst = true;
+                        ids.addVar(newVar);
+                     }
+                     else {
+                          std::cerr << "Error: variable with name '" << $3 << "' already exists." << std::endl;
+                     }
+                    }
+               | TYPE VECTOR '[' NR ']' { if(!ids.existsVect($2)) {
+                        Vector newVector($2,$1,$4);
                           ids.addVect(newVector);
                      }
                      else {
@@ -79,8 +101,8 @@ declaration : TYPE ID { if(!ids.existsVar($2)) {
                      }
                     }
                     ;
-//!!!  pus de mn         | TYPE ID ASSIGN expression { if(!ids.existsVar($2)) {
-                        Value varVal(!ceva stack exterior unde se calculeaza expresia);
+         | TYPE ID ASSIGN expression {  if(!ids.existsVar($2)) {
+                        Value varVal("int");
                         if(varVal.type == $1){
 
                         Variable newVar($2,varVal);
@@ -94,7 +116,7 @@ declaration : TYPE ID { if(!ids.existsVar($2)) {
                           std::cerr << "Error: variable with name '" << $2 << "' already exists." << std::endl;
                      }
                     }
-      pus de mn          | TYPE VECTOR ID '[' NR ']' ASSIGN expression { if(!ids.existsVect($1)) {
+              | TYPE VECTOR ID '[' NR ']' ASSIGN expression { if(!ids.existsVect($1)) {
                           Vector newVector($3,$1,$5);
                           ids.addVect(newVector);
                      }
@@ -110,7 +132,7 @@ list_param : param
 
 param : TYPE ID {
         Parameter param($2,$1);
-        ids.temporaryParams.push_back(param);
+        ids.tempParams.push_back(param);
         }
 
 gfunc : functie
@@ -119,7 +141,7 @@ gfunc : functie
 
 functie : | TYPE FUNCTIE '(' list_param ')' START_FUNC block END_FUNC { if(!ids.existsFunc($2)) {
                         Function newFunc($1,$2);
-                        newFunc.params = move(ids.temporaryParams);
+                        newFunc.params = std::move(ids.tempParams);
                         ids.addFunc(newFunc);
                      }
                      else {
@@ -136,7 +158,7 @@ functie : | TYPE FUNCTIE '(' list_param ')' START_FUNC block END_FUNC { if(!ids.
                     }
             | TYPE FUNCTIE '(' list_param ')' { if(!ids.existsFunc($2)) {
                           Function newFunc($1,$2);
-                        newFunc.params = move(ids.temporaryParams);
+                        newFunc.params = std::move(ids.tempParams);
                         ids.addFunc(newFunc);
                      }
                      else {
@@ -144,7 +166,7 @@ functie : | TYPE FUNCTIE '(' list_param ')' START_FUNC block END_FUNC { if(!ids.
                      }
                     }
             |TYPE FUNCTIE '(' ')' { if(!ids.existsFunc($2)) {
-                          Function newFunc($1,$2);
+                          Function newFunc($2,$1);
                           ids.addFunc(newFunc);
                      }
                      else {
@@ -153,7 +175,7 @@ functie : | TYPE FUNCTIE '(' list_param ')' START_FUNC block END_FUNC { if(!ids.
                     }
                     ;
 
-block : BGIN list END {currentScope = "main";}
+block : BGIN {currentScope = "main";} list END 
        ;
 
 list : statement ';'
@@ -171,30 +193,47 @@ statement : assignment
             | class_statement
             ;
 
-assignment : ID ASSIGN expression { if(!ids.existsVar($1)) {
-                          ids.addVar($3,$1);
-                     }
+assignment : ID ASSIGN expression
+             {                
+                    if(!ids.existsVar($1)){
+                    std::cerr << "Error: call of undeclared variable with name '" << $1 << "'" << std::endl;
                     }
-            | VECTOR '[' NR ']' ASSIGN expression { if(!ids.existsVect($1)) {
-                          ids.addVect(atoi($6),$1);
-                     }
+                    else {
+                         Variable* var = ids.getVar($1);
+                         var->val.val = $3;
+                         std::cout << "Assignment of variable with value '" << std::get<int>(var->val.val) << "'" << std::endl;
                     }
-            ;
+             }
+          | ID ASSIGN ID {
+               if(!ids.existsVar($1)){
+                    std::cerr << "Error: call of undeclared variable with name '" << $1 << "'" << std::endl;
+                    }
+                    else {
+                         Variable* var = ids.getVar($1);
+                         Variable* var2 = ids.getVar($3);
+                         int sum = std::get<int>(var->val.val) + std::get<int>(var2->val.val);
+                         var->val.val = sum;
+                    }
+          }
+          ;
 
-expression : expression '+' expression
-                | expression '-' expression
-                | expression '*' expression
-                | expression '/' expression
-                | expression '%' expression
-                | ID 
-                | NR
-                | FLOAT
-                | CHAR
-                | BOOL
-                | STRING
-                | VECTOR '[' NR ']'
-                | functie_call
-                ;
+expression : expression '+' expression { $$ = $1 + $3; }
+            | expression '-' expression { $$ = $1 - $3; }
+            | expression '*' expression { $$ = $1 * $3; }
+            | expression '/' expression { $$ = $1 / $3; }
+            | expression '%' expression { $$ = $1 % $3; }
+            | NR { $$ = $1; }
+            | ID {
+               if(!ids.existsVar($1)){
+                    std::cerr << "Error: call of undeclared variable with name " << $1 << " " << std::endl;
+                    }
+                    else {
+                         std::cout<< "asd";
+                         Variable* var = ids.getVar($1);
+                         $$ = std::get<int>(var->val.val);
+                    }
+          }
+          ;
 
 if_statement : IF '(' condition ')' block ELSE list
                 | IF '(' condition ')' list
@@ -206,20 +245,17 @@ for_statement : FOR '(' assignment ';' condition ';' assignment ')' list
 while_statement : WHILE '(' condition ')' list
                 ;
 
-//n avem nevoie pt ca avem eval si type_of // print_statement : PRINT '(' STRING ')' { printf("%s\n",$3); }
+print_statement : PRINT '(' STRING ')' { printf("%s\n",$3); }
 
-eval_statement : EVAL '(' expression ')' { printf("%s\n",$3); }
+eval_statement : EVAL '(' expression ')' { printf("%d\n",$3); }
 
-functie_call : FUNCTIE '(' list_param ')' { if(!ids.existsFunc($1)) {
-                          ids.callFunc($1,ids.temporaryParams);
-                          ids.temporaryParams.clear();
+functie_call : FUNCTIE '(' list_param ')' { if(!ids.existsFunc($1)) {                          
                      }
                      else {
                           std::cerr << "Error: function with name '" << $1 << "' already exists." << std::endl;
                      }
                     }
-                | FUNCTIE '(' ')' { if(!ids.existsFunc($1)) {
-                          ids.callFunc($1);
+                | FUNCTIE '(' ')' { if(!ids.existsFunc($1)) {                          
                      }
                      else {
                           std::cerr << "Error: function with name '" << $1 << "' already exists." << std::endl;
@@ -229,7 +265,7 @@ functie_call : FUNCTIE '(' list_param ')' { if(!ids.existsFunc($1)) {
                 ;
 
 class_statement : ID '.' ID ASSIGN expression { if(!ids.existsVar($3)) {
-                          ids.addVar($5,$3);
+                    
                      }
                     }
 

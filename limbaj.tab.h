@@ -53,16 +53,22 @@
      FOR = 269,
      WHILE = 270,
      EVAL = 271,
-     START_CLASA = 272,
-     END_CLASA = 273,
-     START_FUNC = 274,
-     END_FUNC = 275,
-     LOGICAL_OPERATOR = 276,
-     ID = 277,
-     TYPE = 278,
-     FUNCTIE = 279,
-     VECTOR = 280,
-     CLASS = 281
+     TYPEOF = 272,
+     CONST = 273,
+     START_CLASA = 274,
+     DO = 275,
+     END_CLASA = 276,
+     START_FUNC = 277,
+     END_FUNC = 278,
+     LOGICAL_OPERATOR = 279,
+     GVAR = 280,
+     GFUNC = 281,
+     UTYPE = 282,
+     ID = 283,
+     TYPE = 284,
+     FUNCTIE = 285,
+     VECTOR = 286,
+     CLASS = 287
    };
 #endif
 /* Tokens.  */
@@ -80,23 +86,29 @@
 #define FOR 269
 #define WHILE 270
 #define EVAL 271
-#define START_CLASA 272
-#define END_CLASA 273
-#define START_FUNC 274
-#define END_FUNC 275
-#define LOGICAL_OPERATOR 276
-#define ID 277
-#define TYPE 278
-#define FUNCTIE 279
-#define VECTOR 280
-#define CLASS 281
+#define TYPEOF 272
+#define CONST 273
+#define START_CLASA 274
+#define DO 275
+#define END_CLASA 276
+#define START_FUNC 277
+#define END_FUNC 278
+#define LOGICAL_OPERATOR 279
+#define GVAR 280
+#define GFUNC 281
+#define UTYPE 282
+#define ID 283
+#define TYPE 284
+#define FUNCTIE 285
+#define VECTOR 286
+#define CLASS 287
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "limbaj.y"
+#line 15 "limbaj.y"
 {
 char* string;
 int value_int;
@@ -105,7 +117,7 @@ char value_char;
 bool value_bool;
 }
 /* Line 1529 of yacc.c.  */
-#line 109 "limbaj.tab.h"
+#line 121 "limbaj.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

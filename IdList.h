@@ -11,11 +11,12 @@ class Value
 {
 public:
     string type;
-    variant<int, double, bool, char, string> val; // we put double instead of float because that is what atof() returns
+    variant<int, double, bool, char, string> val; // am pus double in loc de float pt ca asta returneaza atof()
 
-    Value();
+    Value(){};
 
-    Value(string type){
+    Value(string type)
+    {
         this->type = type;
     }
 
@@ -56,6 +57,7 @@ public:
     string name;
     Value val;
     string scope;
+    bool isConst = false;
 
     Variable(const string &name, const Value &val)
     {
@@ -120,12 +122,20 @@ public:
 
 class IdList
 {
+public:
     vector<Variable> vars;
     vector<Function> funcs;
     vector<UserDefinedType> userdefs;
     vector<Vector> vectors;
+
     vector<Parameter> tempParams;
-public:
+    Value tempVal;
+
+    Variable *getVar(const char *name);
+    Function *getFunc(const char *name);
+    UserDefinedType *getUserdef(const char *name);
+    Vector *getVect(const char *name);
+
     bool existsVar(const char *name);
     bool existsFunc(const char *name);
     bool existsUserdef(const char *name);
@@ -133,10 +143,237 @@ public:
 
     void addVar(Variable &var);
     void addFunc(Function &func);
-    variant<int, double, bool, char, string> callFunc(const char *name);
+    int callFunc(const char *name);
     void addUserDef(const UserDefinedType &usrdef);
     void addVect(Vector &vector);
 
     void printSymbolTable();
     ~IdList();
+};
+
+class Node
+{
+public:
+    Value value;
+    Node *left;
+    Node *right;
+    char op; // operatia
+
+    // constructor pt frunze, trebuie sa ii dam direct valoarea operandului
+    Node(Value val)
+    {
+        this->value = val;
+        this->left = nullptr;
+        this->right = nullptr;
+        this->op = 0; // = nu exista operatie
+    }
+
+    // contructor pt semn
+    Node(char oper, Node *l, Node *r)
+    {
+        this->value = Value(); // nu are valoare, doar un semn si pointeri catre alte doua noduri
+        this->left = l;
+        this->right = r;
+        this->op = oper;
+    }
+};
+
+class AST
+{
+private:
+    Node *root;
+    Value finalValue;
+
+    Value evaluateNode(Node *node)
+    {
+        if (!node)
+        {
+            std::cerr << "Eroare: nu s-a gasit un nod apelat" << std::endl;
+        }
+
+        if (!node->left && !node->right)
+        {
+            return node->value;
+        }
+        else
+        {
+            Value lVal = node->left ? evaluateNode(node->left) : Value();
+            Value rVal = node->right ? evaluateNode(node->right) : Value(); // pentur Value() -> valoare int = 0
+            Value result;
+            switch (node->op)
+            {
+            case '+':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    int sum = std::get<int>(lVal.val) + std::get<int>(rVal.val);
+                    result.val = sum;
+                    result.type = "int";
+                }
+                else if (lVal.type == "float" && rVal.type == "float")
+                {
+                    double sum = std::get<double>(lVal.val) + std::get<double>(rVal.val);
+                    result.val = sum;
+                    result.type = "float";
+                }
+                break;
+            case '-':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    int sum = std::get<int>(lVal.val) - std::get<int>(rVal.val);
+                    result.val = sum;
+                    result.type = "int";
+                }
+                else if (lVal.type == "float" && rVal.type == "float")
+                {
+                    double sum = std::get<double>(lVal.val) - std::get<double>(rVal.val);
+                    result.val = sum;
+                    result.type = "float";
+                }
+                break;
+            case '*':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    int sum = std::get<int>(lVal.val) * std::get<int>(rVal.val);
+                    result.val = sum;
+                    result.type = "int";
+                }
+                else if (lVal.type == "float" && rVal.type == "float")
+                {
+                    double sum = std::get<double>(lVal.val) * std::get<double>(rVal.val);
+                    result.val = sum;
+                    result.type = "float";
+                }
+                break;
+            case '/':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    int sum = std::get<int>(lVal.val) / std::get<int>(rVal.val);
+                    result.val = sum;
+                    result.type = "int";
+                }
+                else if (lVal.type == "float" && rVal.type == "float")
+                {
+                    double sum = std::get<double>(lVal.val) / std::get<double>(rVal.val);
+                    result.val = sum;
+                    result.type = "float";
+                }
+                break;
+            case '%':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    int sum = std::get<int>(lVal.val) % std::get<int>(rVal.val);
+                    result.val = sum;
+                    result.type = "int";
+                }
+                
+                // operatia % in C nu este facuta nativ pentru float/double
+                // else if (lVal.type == "float" && rVal.type == "float")
+                // {
+                //     double sum = std::get<double>(lVal.val) % std::get<double>(rVal.val);
+                //     result.val = sum;
+                //     result.type = "float";
+                // }
+                break;
+            case '>':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    result.val = std::get<int>(lVal.val) > std::get<int>(rVal.val);
+                    result.type = "bool";
+                }
+                else if (lVal.type == "double" && rVal.type == "double")
+                {
+                    result.val = std::get<double>(lVal.val) > std::get<double>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '<':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    result.val = std::get<int>(lVal.val) < std::get<int>(rVal.val);
+                    result.type = "bool";
+                }
+                else if (lVal.type == "double" && rVal.type == "double")
+                {
+                    result.val = std::get<double>(lVal.val) < std::get<double>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '>=':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    result.val = std::get<int>(lVal.val) >= std::get<int>(rVal.val);
+                    result.type = "bool";
+                }
+                else if (lVal.type == "double" && rVal.type == "double")
+                {
+                    result.val = std::get<double>(lVal.val) >= std::get<double>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '<=':
+                if (lVal.type == "int" && rVal.type == "int")
+                {
+                    result.val = std::get<int>(lVal.val) <= std::get<int>(rVal.val);
+                    result.type = "bool";
+                }
+                else if (lVal.type == "double" && rVal.type == "double")
+                {
+                    result.val = std::get<double>(lVal.val) <= std::get<double>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '&&':
+                if (lVal.type == "bool" && rVal.type == "bool")
+                {
+                    result.val = std::get<bool>(lVal.val) && std::get<bool>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '||':
+                if (lVal.type == "bool" && rVal.type == "bool")
+                {
+                    result.val = std::get<bool>(lVal.val) || std::get<bool>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '==':
+                if (lVal.type == "bool" && rVal.type == "bool")
+                {
+                    result.val = std::get<bool>(lVal.val) == std::get<bool>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '!=':
+                if (lVal.type == "bool" && rVal.type == "bool")
+                {
+                    result.val = std::get<bool>(lVal.val) != std::get<bool>(rVal.val);
+                    result.type = "bool";
+                }
+                break;
+            case '!':
+                if (lVal.type == "bool")
+                {
+                    result.val = !std::get<bool>(lVal.val);
+                    result.type = "bool";
+                }
+                break;
+            }
+            return result;
+        }
+    }
+
+public:
+    AST(Node *rootNode)
+    {
+        this->root = rootNode;
+    }
+
+    Value evaluate()
+    {
+        if (!root)
+        {
+            std::cerr << "Eroare: nu s-a gasit radacina arborelui" << std::endl;
+        }
+        return evaluateNode(root);
+    }
 };

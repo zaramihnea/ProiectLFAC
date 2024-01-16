@@ -1,58 +1,22 @@
-- user types -
-user_types
-class $A {
-    int $xclass <- 3;
-    bool $yclass <- true;
-};
-- global variables -
-global_var
-int @vector 5;
-int $x <- 3;
-float $y;
-const int $my_const <- 19;
-int $a <- 6;
-float $f;
-int $sum <- 0;
-int $abc;
-int $counter <- 0;
-int $max <- 1;
-char $c <- 'a';
-float $fvar1 <- 2.3;
-float $fvar2 <- 3.4;
-int $intvar1 <- 2;
-- global functions-
-global_func
-int maxi(int $x, int $sum)[
-    if $max < $x then
-        $max <- $x;
-    else
-        $x <- $max;
-    endif
+class $A [
 ];
 
-begin_progr
+int $x;
+const float $y;
+float $f;
+int $abc;
 int $mainvar;
-$sum <- $a;
-print $sum;
-print $max;
-maxi($sum + 5, $sum * 6);
-print $max;
-Eval 2;
-Eval $c;
-Eval $yclass;
-Eval $max;
-if $sum = 6 then
-    $sum <- 5 + $a * (-5 - $a) + maxi($a) * 10;
-endif
-print $a;
-$x <- $x + 3;
-while $a > 0 do
-    $a <- $a - 1;
-over 
-TypeOf(2.3);
-TypeOf($sum);
-TypeOf($y);
-print $sum;
-print $x;
-print $yclass;
-end_progr
+
+int %functie(int $a, float $b)
+
+main
+int $myconst;
+%functie();
+const int $sum;
+int $xyz;
+$abc <- 5;
+$x <- 2 + 3 - 4 * $abc;
+$xyz <- $abc + 1;
+$abc <- $x + $xyz;
+$mainvar <- $f;
+end_main
