@@ -5,7 +5,10 @@ using namespace std;
 IdList ids;
 //class AST exprAST;
 string currentScope;
+<<<<<<< HEAD
 string typeOfID;
+=======
+>>>>>>> refs/remotes/origin/main
 
 // void IdList::Eval(const char *name){
 // Variable* var = getVar(name);

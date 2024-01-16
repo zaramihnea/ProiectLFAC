@@ -9,7 +9,10 @@ int yylex();
 void yyerror(const char * s);
 extern IdList ids;
 extern string currentScope;
+<<<<<<< HEAD
 extern string typeOfId;
+=======
+>>>>>>> refs/remotes/origin/main
 %}
 %union 
 {
@@ -40,7 +43,12 @@ utype : class ';'
         | utype class ';'
         ;
 
+<<<<<<< HEAD
 class : CLASS ID {currentScope = $2;} START_CLASA class_list END_CLASA { if(!ids.existsUserdef($2)) {                        
+=======
+class : CLASS ID {currentScope = $2;} START_CLASA list END_CLASA { if(!ids.existsUserdef($2)) {
+                        
+>>>>>>> refs/remotes/origin/main
                         UserDefinedType newUserDef($2);
                           ids.addUserDef(newUserDef);
                      }
@@ -193,6 +201,7 @@ statement : assignment
             | class_statement
             ;
 
+<<<<<<< HEAD
 assignment : ID ASSIGN expression
              {                
                     if(!ids.existsVar($1)){
@@ -202,6 +211,15 @@ assignment : ID ASSIGN expression
                          Variable* var = ids.getVar($1);
                          var->val.val = $3;
                          std::cout << "Assignment of variable with value '" << std::get<int>(var->val.val) << "'" << std::endl;
+=======
+assignment : ID ASSIGN expression { if(!ids.existsVar($1)) {
+                          
+                     }
+                    }
+            | VECTOR '[' NR ']' ASSIGN expression { if(!ids.existsVect($1)) {
+                        
+                     }
+>>>>>>> refs/remotes/origin/main
                     }
              }
           | ID ASSIGN ID {
@@ -217,6 +235,7 @@ assignment : ID ASSIGN expression
           }
           ;
 
+<<<<<<< HEAD
 expression : expression '+' expression { $$ = $1 + $3; }
             | expression '-' expression { $$ = $1 - $3; }
             | expression '*' expression { $$ = $1 * $3; }
@@ -234,6 +253,31 @@ expression : expression '+' expression { $$ = $1 + $3; }
                     }
           }
           ;
+=======
+expression : expression '+' expression
+                | expression '-' expression
+                | expression '*' expression
+                | expression '/' expression
+                | expression '%' expression
+                | ID { if(!ids.existsVar($1)){
+                    std::cerr << "Error: call of undeclared variable with name '" << $1 << "'" << std::endl;
+                }
+                }
+                | NR
+                | FLOAT
+                | CHAR
+                | BOOL
+                | STRING
+                | VECTOR '[' NR ']' { if(!ids.existsVect($1)){
+                    std::cerr << "Error: call of undeclared vector with name '" << $1 << "'" << std::endl;
+                }
+                }
+                | functie_call { if(!ids.existsFunc($1)){
+                    std::cerr << "Error: call of undeclared function with name '" << $1 << "'" << std::endl;
+                }
+                }
+                ;
+>>>>>>> refs/remotes/origin/main
 
 if_statement : IF '(' condition ')' block ELSE list
                 | IF '(' condition ')' list
@@ -249,13 +293,23 @@ print_statement : PRINT '(' STRING ')' { printf("%s\n",$3); }
 
 eval_statement : EVAL '(' expression ')' { printf("%d\n",$3); }
 
+<<<<<<< HEAD
 functie_call : FUNCTIE '(' list_param ')' { if(!ids.existsFunc($1)) {                          
+=======
+functie_call : FUNCTIE '(' list_param ')' { if(!ids.existsFunc($1)) {
+                          
+>>>>>>> refs/remotes/origin/main
                      }
                      else {
                           std::cerr << "Error: function with name '" << $1 << "' already exists." << std::endl;
                      }
                     }
+<<<<<<< HEAD
                 | FUNCTIE '(' ')' { if(!ids.existsFunc($1)) {                          
+=======
+                | FUNCTIE '(' ')' { if(!ids.existsFunc($1)) {
+                          
+>>>>>>> refs/remotes/origin/main
                      }
                      else {
                           std::cerr << "Error: function with name '" << $1 << "' already exists." << std::endl;

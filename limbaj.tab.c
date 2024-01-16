@@ -146,7 +146,10 @@ int yylex();
 void yyerror(const char * s);
 extern IdList ids;
 extern string currentScope;
+<<<<<<< HEAD
 extern string typeOfId;
+=======
+>>>>>>> refs/remotes/origin/main
 
 
 /* Enabling traces.  */
@@ -169,7 +172,11 @@ extern string typeOfId;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
+<<<<<<< HEAD
 #line 15 "limbaj.y"
+=======
+#line 14 "limbaj.y"
+>>>>>>> refs/remotes/origin/main
 {
 char* string;
 int value_int;
@@ -178,7 +185,11 @@ char value_char;
 bool value_bool;
 }
 /* Line 193 of yacc.c.  */
+<<<<<<< HEAD
 #line 182 "limbaj.tab.c"
+=======
+#line 181 "limbaj.tab.c"
+>>>>>>> refs/remotes/origin/main
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -191,7 +202,11 @@ bool value_bool;
 
 
 /* Line 216 of yacc.c.  */
+<<<<<<< HEAD
 #line 195 "limbaj.tab.c"
+=======
+#line 194 "limbaj.tab.c"
+>>>>>>> refs/remotes/origin/main
 
 #ifdef short
 # undef short
@@ -406,16 +421,28 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
+<<<<<<< HEAD
 #define YYLAST   174
+=======
+#define YYLAST   188
+>>>>>>> refs/remotes/origin/main
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  45
 /* YYNNTS -- Number of nonterminals.  */
+<<<<<<< HEAD
 #define YYNNTS  31
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  66
 /* YYNRULES -- Number of states.  */
 #define YYNSTATES  148
+=======
+#define YYNNTS  29
+/* YYNRULES -- Number of rules.  */
+#define YYNRULES  67
+/* YYNRULES -- Number of states.  */
+#define YYNSTATES  150
+>>>>>>> refs/remotes/origin/main
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -464,17 +491,27 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     4,     5,     6,    14,    17,    21,    22,
+<<<<<<< HEAD
       29,    34,    37,    41,    43,    46,    49,    53,    54,    58,
       61,    65,    71,    76,    85,    87,    91,    94,    96,    99,
      100,   109,   117,   123,   128,   129,   134,   137,   141,   143,
      145,   147,   149,   151,   153,   155,   157,   159,   163,   167,
      171,   175,   179,   183,   187,   189,   191,   199,   205,   215,
      221,   226,   231,   236,   240,   246,   250
+=======
+      29,    34,    37,    41,    42,    46,    49,    56,    61,    70,
+      72,    76,    79,    81,    84,    85,    94,   102,   108,   113,
+     114,   119,   122,   126,   128,   130,   132,   134,   136,   138,
+     140,   142,   144,   148,   155,   159,   163,   167,   171,   175,
+     177,   179,   181,   183,   185,   187,   192,   194,   202,   208,
+     218,   224,   229,   234,   239,   243,   249,   253
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
+<<<<<<< HEAD
       46,     0,    -1,    -1,    -1,    -1,    47,    50,    48,    55,
       60,    49,    62,    -1,    51,    33,    -1,    50,    51,    33,
       -1,    -1,    32,    28,    52,    19,    53,    21,    -1,    32,
@@ -501,18 +538,55 @@ static const yytype_int8 yyrhs[] =
       -1,    30,    37,    58,    38,    -1,    30,    37,    38,    -1,
       28,    44,    28,     5,    67,    -1,    67,    24,    67,    -1,
       67,    -1
+=======
+      46,     0,    -1,    -1,    -1,    -1,    47,    50,    48,    53,
+      58,    49,    60,    -1,    51,    33,    -1,    50,    51,    33,
+      -1,    -1,    32,    28,    52,    19,    62,    21,    -1,    32,
+      28,    19,    21,    -1,    55,    33,    -1,    53,    55,    33,
+      -1,    -1,    25,    54,    53,    -1,    29,    28,    -1,    29,
+      31,    28,    34,     6,    35,    -1,    29,    28,     5,    65,
+      -1,    29,    31,    28,    34,     6,    35,     5,    65,    -1,
+      57,    -1,    56,    36,    57,    -1,    29,    28,    -1,    59,
+      -1,    58,    59,    -1,    -1,    29,    30,    37,    56,    38,
+      22,    60,    23,    -1,    29,    30,    37,    38,    22,    60,
+      23,    -1,    29,    30,    37,    56,    38,    -1,    29,    30,
+      37,    38,    -1,    -1,     3,    61,    62,     4,    -1,    63,
+      33,    -1,    62,    63,    33,    -1,    64,    -1,    66,    -1,
+      67,    -1,    68,    -1,    69,    -1,    70,    -1,    55,    -1,
+      71,    -1,    72,    -1,    28,     5,    65,    -1,    31,    34,
+       6,    35,     5,    65,    -1,    65,    39,    65,    -1,    65,
+      40,    65,    -1,    65,    41,    65,    -1,    65,    42,    65,
+      -1,    65,    43,    65,    -1,    28,    -1,     6,    -1,     7,
+      -1,     8,    -1,     9,    -1,    10,    -1,    31,    34,     6,
+      35,    -1,    71,    -1,    12,    37,    73,    38,    60,    13,
+      62,    -1,    12,    37,    73,    38,    62,    -1,    14,    37,
+      64,    33,    73,    33,    64,    38,    62,    -1,    15,    37,
+      73,    38,    62,    -1,    11,    37,    10,    38,    -1,    16,
+      37,    65,    38,    -1,    30,    37,    56,    38,    -1,    30,
+      37,    38,    -1,    28,    44,    28,     5,    65,    -1,    65,
+      24,    65,    -1,    65,    -1
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
        0,    35,    35,    35,    35,    35,    39,    40,    43,    43,
+<<<<<<< HEAD
       51,    60,    61,    64,    65,    69,    70,    71,    71,    74,
       84,    95,   104,   119,   129,   130,   133,   138,   139,   142,
      142,   151,   159,   168,   178,   178,   181,   182,   185,   186,
      187,   188,   189,   190,   191,   192,   193,   196,   207,   220,
      221,   222,   223,   224,   225,   226,   238,   239,   242,   245,
      248,   250,   252,   258,   267,   272,   273
+=======
+      52,    61,    62,    63,    63,    66,    75,    84,    99,   109,
+     110,   113,   118,   119,   122,   122,   131,   139,   148,   158,
+     158,   161,   162,   165,   166,   167,   168,   169,   170,   171,
+     172,   173,   176,   180,   186,   187,   188,   189,   190,   191,
+     195,   196,   197,   198,   199,   200,   204,   210,   211,   214,
+     217,   220,   222,   224,   231,   241,   246,   247
+>>>>>>> refs/remotes/origin/main
 };
 #endif
 
@@ -527,11 +601,19 @@ static const char *const yytname[] =
   "END_FUNC", "LOGICAL_OPERATOR", "GVAR", "GFUNC", "UTYPE", "ID", "TYPE",
   "FUNCTIE", "VECTOR", "CLASS", "';'", "'['", "']'", "','", "'('", "')'",
   "'+'", "'-'", "'*'", "'/'", "'%'", "'.'", "$accept", "progr", "@1", "@2",
+<<<<<<< HEAD
   "@3", "utype", "class", "@4", "class_list", "class_block", "gvars", "@5",
   "declaration", "list_param", "param", "gfunc", "functie", "block", "@6",
   "list", "statement", "assignment", "expression", "if_statement",
   "for_statement", "while_statement", "print_statement", "eval_statement",
   "functie_call", "class_statement", "condition", 0
+=======
+  "@3", "utype", "class", "@4", "gvars", "@5", "declaration", "list_param",
+  "param", "gfunc", "functie", "block", "@6", "list", "statement",
+  "assignment", "expression", "if_statement", "for_statement",
+  "while_statement", "print_statement", "eval_statement", "functie_call",
+  "class_statement", "condition", 0
+>>>>>>> refs/remotes/origin/main
 };
 #endif
 
@@ -552,24 +634,42 @@ static const yytype_uint16 yytoknum[] =
 static const yytype_uint8 yyr1[] =
 {
        0,    45,    47,    48,    49,    46,    50,    50,    52,    51,
+<<<<<<< HEAD
       51,    53,    53,    54,    54,    55,    55,    56,    55,    57,
       57,    57,    57,    57,    58,    58,    59,    60,    60,    61,
       61,    61,    61,    61,    63,    62,    64,    64,    65,    65,
       65,    65,    65,    65,    65,    65,    65,    66,    66,    67,
       67,    67,    67,    67,    67,    67,    68,    68,    69,    70,
       71,    72,    73,    73,    74,    75,    75
+=======
+      51,    53,    53,    54,    53,    55,    55,    55,    55,    56,
+      56,    57,    58,    58,    59,    59,    59,    59,    59,    61,
+      60,    62,    62,    63,    63,    63,    63,    63,    63,    63,
+      63,    63,    64,    64,    65,    65,    65,    65,    65,    65,
+      65,    65,    65,    65,    65,    65,    65,    66,    66,    67,
+      68,    69,    70,    71,    71,    72,    73,    73
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     0,     0,     0,     7,     2,     3,     0,     6,
+<<<<<<< HEAD
        4,     2,     3,     1,     2,     2,     3,     0,     3,     2,
        3,     5,     4,     8,     1,     3,     2,     1,     2,     0,
        8,     7,     5,     4,     0,     4,     2,     3,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     3,     3,     3,
        3,     3,     3,     3,     1,     1,     7,     5,     9,     5,
        4,     4,     4,     3,     5,     3,     1
+=======
+       4,     2,     3,     0,     3,     2,     6,     4,     8,     1,
+       3,     2,     1,     2,     0,     8,     7,     5,     4,     0,
+       4,     2,     3,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     3,     6,     3,     3,     3,     3,     3,     1,
+       1,     1,     1,     1,     1,     4,     1,     7,     5,     9,
+       5,     4,     4,     4,     3,     5,     3,     1
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -578,6 +678,7 @@ static const yytype_uint8 yyr2[] =
 static const yytype_uint8 yydefact[] =
 {
        2,     0,     0,     1,     0,     3,     0,     0,     0,     0,
+<<<<<<< HEAD
        6,     0,     0,     0,    17,     0,    29,     0,     7,    10,
        0,     0,     0,    19,     0,     0,     0,     4,    27,    15,
        0,     0,    13,    20,    18,     0,     0,     0,     0,    16,
@@ -592,19 +693,42 @@ static const yytype_uint8 yydefact[] =
        0,    55,    47,     0,    63,     0,    37,    30,    60,     0,
        0,     0,     0,    61,     0,    62,    65,     0,    57,     0,
       59,    64,     0,     0,    56,     0,     0,    58
+=======
+       6,     0,     0,    13,     0,    24,     0,     7,    10,     0,
+       0,    15,     0,     0,     0,     4,    22,    11,     0,     0,
+       0,     0,     0,     0,     0,     0,    39,     0,     0,    33,
+      34,    35,    36,    37,    38,    40,    41,    14,     0,     0,
+       0,    12,     0,     0,    23,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     9,     0,    31,    50,    51,    52,
+      53,    54,    49,     0,    17,    56,     0,     0,    29,     5,
+       0,    67,     0,     0,     0,     0,     0,    42,     0,     0,
+      64,     0,    19,     0,    32,     0,     0,     0,     0,     0,
+       0,     0,    28,     0,     0,    61,     0,     0,     0,     0,
+      62,     0,    21,     0,    63,     0,     0,    44,    45,    46,
+      47,    48,    16,     0,    27,     0,    66,     0,    58,     0,
+      60,    65,    20,     0,    55,     0,     0,     0,    30,     0,
+       0,    43,    18,    26,     0,    57,     0,    25,     0,    59
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
+<<<<<<< HEAD
       -1,     1,     2,     8,    41,     5,     6,    12,    30,    31,
       16,    22,    85,    65,    66,    27,    28,    54,    67,    86,
       87,    88,   115,    89,    90,    91,    92,    93,    94,    95,
      116
+=======
+      -1,     1,     2,     8,    53,     5,     6,    12,    15,    20,
+      36,    91,    92,    25,    26,    79,   104,    37,    38,    39,
+      81,    40,    41,    42,    43,    44,    75,    46,    82
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
+<<<<<<< HEAD
 #define YYPACT_NINF -100
 static const yytype_int16 yypact[] =
 {
@@ -623,15 +747,41 @@ static const yytype_int16 yypact[] =
       81,   -23,    86,   157,  -100,    74,  -100,  -100,  -100,     1,
       36,     1,    72,  -100,     1,  -100,    86,   150,    72,   136,
       72,    86,    72,   121,    72,   132,    72,    72
+=======
+#define YYPACT_NINF -102
+static const yytype_int16 yypact[] =
+{
+    -102,    12,   -10,  -102,    11,   -10,    16,    37,    -6,    24,
+    -102,    53,    67,  -102,    76,    84,    81,  -102,  -102,   128,
+      -6,    91,    96,    36,    92,    98,  -102,  -102,    94,    95,
+      97,   104,   108,     2,   109,    99,  -102,    47,   114,  -102,
+    -102,  -102,  -102,  -102,  -102,  -102,  -102,   119,    63,   115,
+     113,  -102,   121,   125,  -102,   142,    63,    77,    63,    63,
+      63,   126,   -18,   147,  -102,   122,  -102,  -102,  -102,  -102,
+    -102,  -102,  -102,   127,    40,  -102,   154,     7,  -102,  -102,
+     124,    -9,   129,   158,   131,   130,    60,    40,   160,   138,
+    -102,    -1,  -102,   134,  -102,   164,    63,    63,    63,    63,
+      63,   136,   150,    79,   128,  -102,    63,   107,    63,   128,
+    -102,    63,  -102,   144,  -102,   169,   140,    40,    40,    40,
+      40,    40,   171,   125,   155,    13,    40,   165,   128,   146,
+     128,    40,  -102,    63,  -102,    63,   157,   125,  -102,   128,
+      77,    40,    40,  -102,   159,   128,   143,  -102,   128,   128
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
+<<<<<<< HEAD
     -100,  -100,  -100,  -100,  -100,  -100,   162,  -100,  -100,   138,
      149,  -100,    -3,    66,    96,  -100,   147,   -73,  -100,   -74,
      -85,   -99,   -35,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
      -97
+=======
+    -102,  -102,  -102,  -102,  -102,  -102,   178,  -102,   166,  -102,
+       1,   110,    71,  -102,   163,   -97,  -102,  -101,   -33,   -56,
+     -46,  -102,  -102,  -102,  -102,  -102,   -19,  -102,   -53
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -641,6 +791,7 @@ static const yytype_int16 yypgoto[] =
 #define YYTABLE_NINF -49
 static const yytype_int16 yytable[] =
 {
+<<<<<<< HEAD
       49,   109,    97,   118,   105,    17,   119,    47,    47,    13,
      -48,    23,    36,    26,    24,   -48,    14,    32,    37,    17,
       15,    68,    69,    70,    71,    72,   113,    32,    46,    48,
@@ -659,10 +810,32 @@ static const yytype_int16 yytable[] =
      101,   102,   103,   114,   104,   107,   110,   127,   123,   126,
      128,   105,   134,   142,   131,   130,   132,     9,    44,   143,
      146,    34,    98,   125,    42
+=======
+      45,    84,    74,   125,    65,    85,   128,    60,   130,    16,
+     127,    89,     3,    86,    87,   106,    24,   138,    45,    13,
+      90,    16,     4,    14,    28,    29,   136,    30,    31,    32,
+      96,    97,    98,    99,   100,   113,    89,   114,   145,     7,
+     144,    33,    14,    34,    35,   102,    61,   149,    24,    10,
+     117,   118,   119,   120,   121,   129,    11,    17,    28,    29,
+     126,    30,    31,    32,    21,   131,    50,    22,    64,    67,
+      68,    69,    70,    71,    18,    33,    14,    34,    35,    96,
+      97,    98,    99,   100,   146,    45,    19,   141,    45,   142,
+      45,    72,    65,    34,    73,    65,    48,    65,   110,    96,
+      97,    98,    99,   100,    21,    83,    45,    22,    35,    45,
+      78,    45,    65,    23,    27,   113,    65,   124,    28,    29,
+      45,    30,    31,    32,    49,    51,    45,    52,    78,    45,
+      45,    55,    56,    63,    57,    33,    14,    34,    35,    28,
+      29,    58,    30,    31,    32,    59,    62,    66,    14,    76,
+      77,    50,    80,    93,    88,    94,    33,    14,    34,    35,
+     101,    95,   105,    60,   108,   111,   112,   107,   109,   115,
+     116,   122,   123,    89,   133,   134,   135,   137,   139,   140,
+     143,   148,   147,     9,   132,     0,    47,   103,    54
+>>>>>>> refs/remotes/origin/main
 };
 
 static const yytype_uint8 yycheck[] =
 {
+<<<<<<< HEAD
       35,    86,    75,   102,     5,     8,   103,     6,     6,    18,
       33,    28,    28,    16,    31,    38,    25,    20,    34,    22,
       29,    56,    57,    58,    59,    60,    99,    30,    31,    28,
@@ -681,6 +854,27 @@ static const yytype_uint8 yycheck[] =
       37,    37,    37,    10,    37,    37,    33,    23,    28,    33,
       38,     5,     5,    13,    33,    38,    38,     5,    30,    33,
       38,    22,    76,   107,    27
+=======
+      19,    57,    48,   104,    37,    58,   107,     5,   109,     8,
+     107,    29,     0,    59,    60,    24,    15,     4,    37,    25,
+      38,    20,    32,    29,    11,    12,   123,    14,    15,    16,
+      39,    40,    41,    42,    43,    36,    29,    38,   139,    28,
+     137,    28,    29,    30,    31,    38,    44,   148,    47,    33,
+      96,    97,    98,    99,   100,   108,    19,    33,    11,    12,
+     106,    14,    15,    16,    28,   111,    30,    31,    21,     6,
+       7,     8,     9,    10,    21,    28,    29,    30,    31,    39,
+      40,    41,    42,    43,   140,   104,    19,   133,   107,   135,
+     109,    28,   125,    30,    31,   128,     5,   130,    38,    39,
+      40,    41,    42,    43,    28,    28,   125,    31,    31,   128,
+       3,   130,   145,    29,    33,    36,   149,    38,    11,    12,
+     139,    14,    15,    16,    28,    33,   145,    29,     3,   148,
+     149,    37,    37,    34,    37,    28,    29,    30,    31,    11,
+      12,    37,    14,    15,    16,    37,    37,    33,    29,    34,
+      37,    30,    10,     6,    28,    33,    28,    29,    30,    31,
+       6,    34,    38,     5,    33,     5,    28,    38,    38,    35,
+       6,    35,    22,    29,     5,    35,     5,    22,    13,    33,
+      23,    38,    23,     5,   113,    -1,    20,    77,    25
+>>>>>>> refs/remotes/origin/main
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -688,6 +882,7 @@ static const yytype_uint8 yycheck[] =
 static const yytype_uint8 yystos[] =
 {
        0,    46,    47,     0,    32,    50,    51,    28,    48,    51,
+<<<<<<< HEAD
       33,    19,    52,    18,    25,    29,    55,    57,    33,    21,
       19,    29,    56,    28,    31,    29,    57,    60,    61,    33,
       53,    54,    57,    28,    55,     5,    28,    34,    30,    33,
@@ -702,6 +897,22 @@ static const yytype_uint8 yystos[] =
       67,    28,    67,    28,    38,    58,    33,    23,    38,    24,
       38,    33,    38,    38,     5,    38,    67,    62,    64,    75,
       64,    67,    13,    33,    64,    66,    38,    64
+=======
+      33,    19,    52,    25,    29,    53,    55,    33,    21,    19,
+      54,    28,    31,    29,    55,    58,    59,    33,    11,    12,
+      14,    15,    16,    28,    30,    31,    55,    62,    63,    64,
+      66,    67,    68,    69,    70,    71,    72,    53,     5,    28,
+      30,    33,    29,    49,    59,    37,    37,    37,    37,    37,
+       5,    44,    37,    34,    21,    63,    33,     6,     7,     8,
+       9,    10,    28,    31,    65,    71,    34,    37,     3,    60,
+      10,    65,    73,    28,    64,    73,    65,    65,    28,    29,
+      38,    56,    57,     6,    33,    34,    39,    40,    41,    42,
+      43,     6,    38,    56,    61,    38,    24,    38,    33,    38,
+      38,     5,    28,    36,    38,    35,     6,    65,    65,    65,
+      65,    65,    35,    22,    38,    62,    65,    60,    62,    73,
+      62,    65,    57,     5,    35,     5,    60,    22,     4,    13,
+      33,    65,    65,    23,    60,    62,    64,    23,    38,    62
+>>>>>>> refs/remotes/origin/main
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1544,7 +1755,12 @@ yyreduce:
 
   case 9:
 #line 43 "limbaj.y"
+<<<<<<< HEAD
     { if(!ids.existsUserdef((yyvsp[(2) - (6)].string))) {                        
+=======
+    { if(!ids.existsUserdef((yyvsp[(2) - (6)].string))) {
+                        
+>>>>>>> refs/remotes/origin/main
                         UserDefinedType newUserDef((yyvsp[(2) - (6)].string));
                           ids.addUserDef(newUserDef);
                      }
@@ -1555,17 +1771,55 @@ yyreduce:
     break;
 
   case 10:
+<<<<<<< HEAD
 #line 51 "limbaj.y"
+=======
+#line 52 "limbaj.y"
+>>>>>>> refs/remotes/origin/main
     { if(!ids.existsUserdef((yyvsp[(2) - (4)].string))) {
                           UserDefinedType newUserDef((yyvsp[(2) - (4)].string));
                           ids.addUserDef(newUserDef);
                      } else {
                           std::cerr << "Error: class with name '" << (yyvsp[(2) - (4)].string) << "' already exists." << std::endl;
+<<<<<<< HEAD
+=======
+                     }
+                    ;}
+    break;
+
+  case 13:
+#line 63 "limbaj.y"
+    {currentScope = "global";;}
+    break;
+
+  case 15:
+#line 66 "limbaj.y"
+    { if(!ids.existsVar((yyvsp[(2) - (2)].string))) {
+                        Value varVal((yyvsp[(1) - (2)].string));
+                        Variable newVar((yyvsp[(2) - (2)].string),varVal);
+                        ids.addVar(newVar);
+                     }
+                     else {
+                          std::cerr << "Error: variable with name '" << (yyvsp[(2) - (2)].string) << "' already exists." << std::endl;
+                     }
+                    ;}
+    break;
+
+  case 16:
+#line 75 "limbaj.y"
+    { if(!ids.existsVect((yyvsp[(3) - (6)].string))) {
+                        Vector newVector((yyvsp[(3) - (6)].string),(yyvsp[(1) - (6)].string),(yyvsp[(5) - (6)].value_int));
+                          ids.addVect(newVector);
+                     }
+                     else {
+                          std::cerr << "Error: vector with name '" << (yyvsp[(2) - (6)].string) << "' already exists." << std::endl;
+>>>>>>> refs/remotes/origin/main
                      }
                     ;}
     break;
 
   case 17:
+<<<<<<< HEAD
 #line 71 "limbaj.y"
     {currentScope = "global";;}
     break;
@@ -1579,10 +1833,85 @@ yyreduce:
                      }
                      else {
                           std::cerr << "Error: variable with name '" << (yyvsp[(2) - (2)].string) << "' already exists." << std::endl;
+=======
+#line 84 "limbaj.y"
+    {  if(!ids.existsVar((yyvsp[(2) - (4)].string))) {
+                        Value varVal("int");
+                        if(varVal.type == (yyvsp[(1) - (4)].string)){
+
+                        Variable newVar((yyvsp[(2) - (4)].string),varVal);
+                        ids.addVar(newVar);
+                        } else {
+                        std::cerr << "Error: variable with name '" << (yyvsp[(2) - (4)].string) << "' was attributed the wrong type." << std::endl;
+
+                        }
+                     }
+                     else {
+                          std::cerr << "Error: variable with name '" << (yyvsp[(2) - (4)].string) << "' already exists." << std::endl;
                      }
                     ;}
     break;
 
+  case 18:
+#line 99 "limbaj.y"
+    { if(!ids.existsVect((yyvsp[(1) - (8)].string))) {
+                          Vector newVector((yyvsp[(3) - (8)].string),(yyvsp[(1) - (8)].string),(yyvsp[(5) - (8)].value_int));
+                          ids.addVect(newVector);
+                     }
+                     else {
+                          std::cerr << "Error: vector with name '" << (yyvsp[(2) - (8)].string) << "' already exists." << std::endl;
+                     }
+                    ;}
+    break;
+
+  case 21:
+#line 113 "limbaj.y"
+    {
+        Parameter param((yyvsp[(2) - (2)].string),(yyvsp[(1) - (2)].string));
+        ids.tempParams.push_back(param);
+        ;}
+    break;
+
+  case 25:
+#line 122 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(2) - (8)].string))) {
+                        Function newFunc((yyvsp[(1) - (8)].string),(yyvsp[(2) - (8)].string));
+                        newFunc.params = std::move(ids.tempParams);
+                        ids.addFunc(newFunc);
+                     }
+                     else {
+                          std::cerr << "Error: function with name '" << (yyvsp[(2) - (8)].string) << "' already exists." << std::endl;
+                     }
+                    ;}
+    break;
+
+  case 26:
+#line 131 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(2) - (7)].string))) {
+                          Function newFunc((yyvsp[(1) - (7)].string),(yyvsp[(2) - (7)].string));
+                          ids.addFunc(newFunc);
+                     }
+                     else {
+                          std::cerr << "Error: function with name '" << (yyvsp[(2) - (7)].string) << "' already exists." << std::endl;
+                     }
+                    ;}
+    break;
+
+  case 27:
+#line 139 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(2) - (5)].string))) {
+                          Function newFunc((yyvsp[(1) - (5)].string),(yyvsp[(2) - (5)].string));
+                        newFunc.params = std::move(ids.tempParams);
+                        ids.addFunc(newFunc);
+                     }
+                     else {
+                          std::cerr << "Error: function with name '" << (yyvsp[(2) - (5)].string) << "' already exists." << std::endl;
+>>>>>>> refs/remotes/origin/main
+                     }
+                    ;}
+    break;
+
+<<<<<<< HEAD
   case 20:
 #line 84 "limbaj.y"
     {
@@ -1683,10 +2012,21 @@ yyreduce:
                      }
                      else {
                           std::cerr << "Error: function with name '" << (yyvsp[(2) - (5)].string) << "' already exists." << std::endl;
+=======
+  case 28:
+#line 148 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(2) - (4)].string))) {
+                          Function newFunc((yyvsp[(1) - (4)].string),(yyvsp[(2) - (4)].string));
+                          ids.addFunc(newFunc);
+                     }
+                     else {
+                          std::cerr << "Error: function with name '" << (yyvsp[(2) - (4)].string) << "' already exists." << std::endl;
+>>>>>>> refs/remotes/origin/main
                      }
                     ;}
     break;
 
+<<<<<<< HEAD
   case 33:
 #line 168 "limbaj.y"
     { if(!ids.existsFunc((yyvsp[(2) - (4)].string))) {
@@ -1695,10 +2035,22 @@ yyreduce:
                      }
                      else {
                           std::cerr << "Error: function with name '" << (yyvsp[(2) - (4)].string) << "' already exists." << std::endl;
+=======
+  case 29:
+#line 158 "limbaj.y"
+    {currentScope = "main";;}
+    break;
+
+  case 42:
+#line 176 "limbaj.y"
+    { if(!ids.existsVar((yyvsp[(1) - (3)].string))) {
+                          
+>>>>>>> refs/remotes/origin/main
                      }
                     ;}
     break;
 
+<<<<<<< HEAD
   case 34:
 #line 178 "limbaj.y"
     {currentScope = "main";;}
@@ -1790,6 +2142,54 @@ yyreduce:
   case 62:
 #line 252 "limbaj.y"
     { if(!ids.existsFunc((yyvsp[(1) - (4)].string))) {                          
+=======
+  case 43:
+#line 180 "limbaj.y"
+    { if(!ids.existsVect((yyvsp[(1) - (6)].string))) {
+                        
+                     }
+                    ;}
+    break;
+
+  case 49:
+#line 191 "limbaj.y"
+    { if(!ids.existsVar((yyvsp[(1) - (1)].string))){
+                    std::cerr << "Error: call of undeclared variable with name '" << (yyvsp[(1) - (1)].string) << "'" << std::endl;
+                }
+                ;}
+    break;
+
+  case 55:
+#line 200 "limbaj.y"
+    { if(!ids.existsVect((yyvsp[(1) - (4)].string))){
+                    std::cerr << "Error: call of undeclared vector with name '" << (yyvsp[(1) - (4)].string) << "'" << std::endl;
+                }
+                ;}
+    break;
+
+  case 56:
+#line 204 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(1) - (1)].string))){
+                    std::cerr << "Error: call of undeclared function with name '" << (yyvsp[(1) - (1)].string) << "'" << std::endl;
+                }
+                ;}
+    break;
+
+  case 61:
+#line 220 "limbaj.y"
+    { printf("%s\n",(yyvsp[(3) - (4)].string)); ;}
+    break;
+
+  case 62:
+#line 222 "limbaj.y"
+    { printf("%s\n",(yyvsp[(3) - (4)].string)); ;}
+    break;
+
+  case 63:
+#line 224 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(1) - (4)].string))) {
+                          
+>>>>>>> refs/remotes/origin/main
                      }
                      else {
                           std::cerr << "Error: function with name '" << (yyvsp[(1) - (4)].string) << "' already exists." << std::endl;
@@ -1797,9 +2197,16 @@ yyreduce:
                     ;}
     break;
 
+<<<<<<< HEAD
   case 63:
 #line 258 "limbaj.y"
     { if(!ids.existsFunc((yyvsp[(1) - (3)].string))) {                          
+=======
+  case 64:
+#line 231 "limbaj.y"
+    { if(!ids.existsFunc((yyvsp[(1) - (3)].string))) {
+                          
+>>>>>>> refs/remotes/origin/main
                      }
                      else {
                           std::cerr << "Error: function with name '" << (yyvsp[(1) - (3)].string) << "' already exists." << std::endl;
@@ -1807,8 +2214,13 @@ yyreduce:
                     ;}
     break;
 
+<<<<<<< HEAD
   case 64:
 #line 267 "limbaj.y"
+=======
+  case 65:
+#line 241 "limbaj.y"
+>>>>>>> refs/remotes/origin/main
     { if(!ids.existsVar((yyvsp[(3) - (5)].string))) {
                     
                      }
@@ -1817,7 +2229,11 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
+<<<<<<< HEAD
 #line 1821 "limbaj.tab.c"
+=======
+#line 1775 "limbaj.tab.c"
+>>>>>>> refs/remotes/origin/main
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2031,7 +2447,11 @@ yyreturn:
 }
 
 
+<<<<<<< HEAD
 #line 277 "limbaj.y"
+=======
+#line 251 "limbaj.y"
+>>>>>>> refs/remotes/origin/main
 
 void yyerror(const char * s){
 printf("error: %s at line:%d\n",s,yylineno);

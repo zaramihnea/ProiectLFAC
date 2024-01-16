@@ -108,7 +108,11 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
+<<<<<<< HEAD
 #line 15 "limbaj.y"
+=======
+#line 14 "limbaj.y"
+>>>>>>> refs/remotes/origin/main
 {
 char* string;
 int value_int;

@@ -13,7 +13,11 @@ public:
     string type;
     variant<int, double, bool, char, string> val; // am pus double in loc de float pt ca asta returneaza atof()
 
+<<<<<<< HEAD
     Value(){};
+=======
+    Value() {};
+>>>>>>> refs/remotes/origin/main
 
     Value(string type)
     {
@@ -130,12 +134,15 @@ public:
 
     vector<Parameter> tempParams;
     Value tempVal;
+<<<<<<< HEAD
 
     Variable *getVar(const char *name);
     Function *getFunc(const char *name);
     UserDefinedType *getUserdef(const char *name);
     Vector *getVect(const char *name);
 
+=======
+>>>>>>> refs/remotes/origin/main
     bool existsVar(const char *name);
     bool existsFunc(const char *name);
     bool existsUserdef(const char *name);
@@ -151,6 +158,7 @@ public:
     ~IdList();
 };
 
+<<<<<<< HEAD
 class Node
 {
 public:
@@ -377,3 +385,28 @@ public:
         return evaluateNode(root);
     }
 };
+=======
+// class AST
+// {
+//     vector<Node> expression; // the expression currently being evaluated
+//     string type;             // data type of the expression
+//     Value finalValue;
+// public:
+    
+// };
+
+// class Node
+// {
+//     Node lChild, rChild;
+//     char symbol;
+//     Value val;
+
+//     Node(Vector vector) {
+
+//     }
+// };
+
+// ceva functie recurenta kind of care se apeleaza cu alte date
+// daca e doar o valoare, se baga in nod,
+// daca
+>>>>>>> refs/remotes/origin/main

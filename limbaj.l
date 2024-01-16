@@ -13,7 +13,11 @@
 
 "<-" {return ASSIGN;}
 
+<<<<<<< HEAD
 "<"|">"|"<="|">="|"="|"||"|"&&"|"!=" {return LOGICAL_OPERATOR;}
+=======
+"<"|">"|"<="|">="|"="|"si"|"sau" {return LOGICAL_OPERATOR;}
+>>>>>>> refs/remotes/origin/main
 
 "user_types" {return UTYPE;}
 "global_var" {return GVAR;}

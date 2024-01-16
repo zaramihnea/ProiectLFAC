@@ -1,5 +1,6 @@
 Symbol Table:
 Variables and Constants:
+<<<<<<< HEAD
 Name: $x, Type: int, Is Const: 0, Scope: global, Value: -15
 Name: $y, Type: float, Is Const: 1, Scope: global, Value: 0
 Name: $f, Type: float, Is Const: 0, Scope: global, Value: 0
@@ -14,3 +15,7 @@ Name: int, Return Type: %functie, Scope: global, Parameters: $a:int $b:float
 
 User Defined Types:
 Name: $A
+=======
+
+Functions:
+>>>>>>> refs/remotes/origin/main
